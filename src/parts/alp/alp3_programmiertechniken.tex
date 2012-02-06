@@ -1,0 +1,57 @@
+\section{Programmiertechniken}
+\label{sec:Programmiertechniken}
+%
+%
+\subsection{Rekursion}
+\label{subsec:Rekursion}
+
+%
+%
+\subsection{Dynamische Programmierung}
+\label{subsec:DynamischeProgrammierung}
+Dynamische Programmierung ist eine Technik um die Effizienz rekursiver Alg. zu verbessern.
+Dabei werden Zwischenschritte gespeichert, die sonst bei erneuten Rekursionsaufrufen erneut berechnet würden.
+Dazu wird eine Tabelle verwendet, in die ...
+
+%
+%
+\subsection{Gierige Algorithmen}
+\label{subsec:GierigeAlgorithmen}
+
+Gierige (engl. \textit{greedy}) Algorithmen treffen lokal optimierte Entscheidungen in der Erwartung so auch ein globales Optimum zu erreichen.
+
+Ein Beispiel dafür ist das Münzwechseln
+
+Weitere gierige Algorithmen, die im weiteren Verlauf vorgestellt werden, sind zum Beispiel
+der Kompressionsalgorithmus von Huffman (\ref{subsubsec:HuffmanKodierung}),
+die Tiefensuche (?) in Graphen (\ref{subsec:Tiefensuche}) sowie
+die Graphen-Algorithmen von Prim (\ref{subsubsec:PrimJarnikDijkstra}),
+Kruskal (\ref{subsubsec:Kruskal}) und Dijkstra (\ref{subsubsec:Dijkstra}).
+
+
+%
+%
+\subsection{Backtracking}
+\label{subsec:Backtracking}
+
+%
+%
+\subsection{Hashing}
+\label{subsec:Hashing}
+Zur Implementierung in Java:
+http://www.pakzilla.com/2009/08/24/hashmap-vs-hashtable-vs-hashset/
+
+\subsubsection{Konfliktbehandlung}
+
+\paragraph{Verkettung}
+\paragraph{Lineares Sondieren}
+\paragraph{Kuckuck} Bei diesem Verfahren werden zwei unterschiedliche Hashfunktionen $h_1$ und $h_2$ verwendet.
+Sobald eine Kollision entsteht, nimmt das neue Element den Platz des bereits vorhandenen ein und dieses wird mit der anderen Hashfunktion erneut gehasht.
+
+!!! Mit welcher genau? Immer abwechselnd, oder für jedes Element verwendete Funktion merken? !!!
+
+\subsubsection{Universelles Hashing}
+Menge von Hashfunktionen $H$, Menge von Schlüsseln $K$.
+$h \in H$ ist universell, wenn $Pr(h(k_1) = h(k_2)) \leq \frac{|H|}{|N|}$.
+$H$ ist universell, wenn alle $h \in H$ universell (oder so).
+$H$ ist universell, wenn $\forall h \in H: \forall k_1, k_2 \in K, k_1 \neq k_2: Pr(...)$

@@ -1,0 +1,47 @@
+%
+%
+%
+%
+\section{Motivation}
+
+Definition: Algorithmus\\
+Ein Algorithmus ist eine Rechenvorschrift, die eine Eingabe in eine Ausgabe überführt, und:
+\begin{enumerate}
+	\item endlich beschrieben,
+	\item effektiv,
+	\item allgemein,
+	\item (deterministisch)
+\end{enumerate}
+ist.
+Ein Algorithmus ist gut, wenn er:
+\begin{enumerate}
+	\item immer korrekt terminiert.
+	\item richtige Antworten gibt.
+	\item schnell,
+	\item speichereffizient,
+	\item gut lesbar
+\end{enumerate}
+ist.
+
+Bewertung nach Laufzeit und Speicherbedarf, experimentell oder theoretisch\\
+Analyse-Verfahren nach den Datenstrukturen und Algorithmen\\
+Zum Schluss Anwendungen
+
+\subsection{Bewertung und Analyse von Algorithmen}
+
+Analyse auf Basis von Pseudo-Code, eine Zeile PC entspricht beliebig aber konstant vielen Schritten auf RAM.
+%
+%
+\subsubsection{Registermaschinen und O-Notation}
+Empirische Analyse vs. theoretische Analyse\\
+Definition: Registermaschine bzw. Random Access Machine (RAM)\\
+Definitionen: Laufzeit und Speicherbedarf bei einer RAM
+%
+%
+\subsubsection{Amortisierte Analyse}
+Wir betrachten eine Folge von Operationen eines Algorithmus im worst-case.
+Wenn wir zeigen können, dass jede Folge von $n$ Operationen $f(m)$ Zeit benötigt,
+dann sagen wir, die amortisierten Kosten pro Operation sind $f(m)/n$.
+%
+%
+\subsubsection{Analyse randomisierter Algorithmen}

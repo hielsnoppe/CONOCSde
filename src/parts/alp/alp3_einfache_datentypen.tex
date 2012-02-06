@@ -1,0 +1,53 @@
+\section{Einfache Datentypen}
+\label{sec:EinfacheDatentypen}
+%
+%
+\subsection{Dynamische Arrays}
+\label{subsec:DynamischeArrays}
+%
+%
+\subsection{Listen}
+\label{subsec:Listen}
+Einfach oder doppelt verkettet.
+%
+%
+\subsection{Stacks (Stapel)}
+\label{subsec:Stacks}
+
+\subsubsection{Operationen}
+
+\paragraph{push} Fügt ein Element oben auf dem Stapel hinzu.
+\paragraph{pop} Gibt das oberste Element des Stapels zurück und entfernt es.
+\paragraph{top} Gibt das oberste Element des Stapels zurück.
+\paragraph{size} Gibt die Anzahl der Elemente des Stapels zurück.
+\paragraph{isEmpty} Gibt \textit{wahr} zurück, wenn die Warteschlange leer ist, sonst \textit{falsch}.
+
+\subsubsection{Implementierung}
+Implementiert als verkettete Liste oder (dynamisches) Array
+%
+%
+\subsection{Queues (Warteschlangen)}
+
+\subsubsection{Operationen}
+\paragraph{enqueue} Fügt ein Element an das Ende der Warteschlange an.
+\paragraph{dequeue} Gibt das vorderste Element der Warteschlange zurück und entfernt es.
+\paragraph{front} Gibt das vorderste Element der Warteschlange zurück.
+\paragraph{size} Gibt die Anzahl der Elemente der Warteschlange zurück.
+\paragraph{isEmpty} Gibt \textit{wahr} zurück, wenn die Warteschlange leer ist, sonst \textit{falsch}.
+
+\subsubsection{Implementierung}
+Implementiert als verkettete Liste oder (dynamisches) Array\\
+
+\subsection{Priorityqueues (Pritoritätswarteschlangen)}
+\label{subsec:Priorityqueues}
+
+\subsubsection{Operationen}
+\paragraph{insert / enqueue} Fügt ein Element an das Ende der Warteschlange an.
+\paragraph{deleteMin / dequeue} Gibt das vorderste Element der Warteschlange zurück und entfernt es.
+\paragraph{findMin / front} Gibt das vorderste Element der Warteschlange zurück.
+\paragraph{size} Gibt die Anzahl der Elemente der Warteschlange zurück.
+\paragraph{isEmpty} Gibt \textit{wahr} zurück, wenn die Warteschlange leer ist, sonst \textit{falsch}.
+
+\subsubsection{Implementierung}
+Eine Prioritätswarteschlange kann ähnlich einer normalen Warteschlange implementiert werden, wenn die Funktion zum Einfügen die Prioritäten berücksichtigt.
+Effizienter lässt sich eine Prioritätswarteschlange jedoch durch Heaps (\ref{subsec:Heaps}) implementieren, die später im Abschnitt über Bäume (\ref{sec:Baeume}) erklärt werden.

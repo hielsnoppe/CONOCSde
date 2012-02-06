@@ -1,0 +1,185 @@
+\section{Anwendungen}
+\label{sec:Anwendungen}
+
+\subsection{Softwareentwurf}
+\label{subsec:Softwareentwurf}
+
+
+\subsection{Arbeiten mit Zeichenketten}
+\label{subsec:ArbeitenMitZeichenketten}
+
+\subsubsection{Huffman-Kodierung}
+\label{subsubsec:HuffmanKodierung}
+
+Allgemeines Bla-Bla.
+
+Ein Huffman-Baum ist ein binärer Baum.
+Darin hat jeder Knoten entweder genau zwei Knoten, oder genau ein Zeichen als Kinder.
+
+\paragraph{Aufbau eines Huffman-Baumes}
+
+Um einen Huffman-Baum aufzubauen muss zuerst die Häufigkeit jedes Zeichens ermittelt werden.
+Für jedes der Zeichen wird dann ein Knoten mit der Häufigkeit des Zeichens als Wert erzeugt,
+der das Zeichen als Kind hat und selbst bereits einen Huffman-Baum darstellt.
+
+All diese Bäume werden nun in eine Prioritätswarteschlange eingefügt,
+die nach dem Wert in der Wurzel eines Baumes sortiert.
+Aus dieser Warteschlange werden nun solange die beiden kleinsten Bäume entnommen,
+bis die Warteschlange nur noch ein Element enthält.
+Die beiden entnommenen Bäume werden Kinder eines neuen Baumes,
+dessen Wurzel die Summe der Werte in den Wurzeln der beiden Bäume als Wert hat.
+Dieser Baum wird wiederum in die Warteschlange eingefügt.
+
+Zuletzt bleibt der gesuchte Huffman-Baum als Einziger in der Warteschlange zurück.
+
+\paragraph{Kodierung}
+
+\paragraph{Dekodierung}
+
+\paragraph{Beispiel}
+
+Die verschiedenen Schritte der Huffman-Kompression wollen wir nun an einem Beispiel nachvollziehen.
+Dazu soll das Wort "`RELIEFPFEILER"' (4 $\times$ E; 2 $\times$ R, L, I, F; 1 $\times$ P) kodiert werden.
+Aus den Häufigkeiten der Zeichen können wir folgende Huffman-Bäume erzeugen:
+
+\begin{figure}[h]%[htbp]
+%\includegraphics{huffmanbaeume.png}
+\caption{Huffman-Bäume}
+\label{fig:HuffmanBaeume}
+\end{figure}
+
+Diese verschmelzen wir nun mithilfe einer Prioritätswarteschlange zu unserem fertigen Huffman-Baum:
+
+\begin{figure}[h]%[htbp]
+%\includegraphics{verschmelzenvonhuffmanbaeumen.png}
+\caption{Verschmelzen von Huffman-Bäumen}
+\label{fig:VerschmelzenVonHuffmanbaeumen}
+\end{figure}
+
+Dieser Baum enthält nun für jedes Zeichen die entsprechende Kodierung:
+
+\begin{figure}[h]%[htbp]
+\begin{center}
+\begin{tabular}{c|l|l}
+Zeichen	& Häufigkeit	& Kodierung	\\\hline
+R	& 2		& 00		\\
+P	& 1		& 010		\\
+F	& 2		& 011		\\
+E	& 4		& 10		\\
+I	& 2		& 110		\\
+L	& 2		& 111
+\end{tabular}
+\end{center}
+\caption{Kodierungen}
+\label{fig:KodierungenHuffman}
+\end{figure}
+
+Es ist zu erkennen, dass keine Kodierung Präfix einer anderen Kodierung ist.
+Außerdem ist die Kodierung für das häufigste Zeichen (E) am kürzesten.
+Bei der geringen Anzahl an Zeichen ist dieser Unterscheid allerdings nocht nicht besonders groß
+und auch andere Zeichen (R) haben eine entsprechend kurze Kodierung.
+
+\subsubsection{Rabin-Karp}
+\label{subsubsection:RabinKarp}
+
+% Download von Veranstaltungsseite (stringsearch.txt)
+\begin{verbatim}
+Gegeben: Zwei Zeichenketten
+           s = s[1]s[2]...s[k]
+	   t = t[1]t[2]...t[l]
+wobei l <= k.
+
+Frage: Ist t in s enthalten? Wenn ja, wo ist das erste Vorkommen?
+
+Naiver Algorithmus:
+for i := 1 to k - l + 1
+  // Does s contain t at position i?
+  j <- 1
+  while (j <= k and s[i+j-1] = t[j])
+    j++
+  // If yes, return postion i
+  if j = k+1 then
+    return i
+// Not found, return -1
+return -1
+
+Die Laufzeit ist O(kl), was nur akzeptabel ist,  
+wenn l klein ist. Kann man die Laufzeit verbessern?
+
+Die Idee von Rabin-Karp: Der Flaschenhals darin, dass wir
+innerhalb der for-Schleife jedesmal den kompletten Substring
+s[i...i+l-1] mit t vergleichen. Wir koennten die Schleife
+beschleunigen, wenn wir vorher einen schnellen Test haetten,
+der uns zeigt, ob es wahrscheinlich ist, dass s[i...i+l-1]
+und t gleich sind. Dieser Test laesst sich durch eine 
+*Hashfunktion* bewerkstelligen. Eine solche Hashfunktion
+weist sowohl s[i...i+l-1] und t eine Zahl zu, und diese
+Zahlen lassen sich schnell vergleichen. Ausserdem hat eine
+gute Hashfunktion wenig Kollisionen, so dass es selten vorkommt,
+dass s[i...i+l-1] und t denselben Hashwert erhalten, obwohl
+sie unterschiedlich sind.
+
+Dies fuehrt zu folgendem Ansatz (Rabin-Karp-Algorithmus).
+Sei h eine Hashfunktion:
+for i := 1 to k - l + 1
+  if h(s[i...i+l-1]) = h(t) then
+    if s[i...i+l-1] = t then
+      return i
+return -1
+
+Wenn Kollisionen selten sind, sollte der Aufwand fuer den Vergleich
+s[i...i+l-1] ?= t vernachlaessigbar sein.
+Aber wir haben ein neues Problem: Wie berechnet man die Hashfunktion schnell?
+(Ansonsten waere die ganze Idee natuerlich witzlos.)
+
+Zur Erinnerung: Vor ein paar Monaten hatten wir eine Hashfunktion h' fuer einen 
+String a = a[0]a[1]...a[l-1] folgendermassen definiert: Wir hatten die Zeichen 
+a[i] als Zahlen zwischen 0 und S-1 interpretiert (S = |Sigma|, die 
+Alphabetgroesse), und geschrieben
+  
+  h'(a) = (sum_{j=0}^{l-1} a[j]*S^{j}) mod p
+
+Fuer Rabin-Karp ist es besser, die Hashfunktion etwas anders zu definieren:
+
+  h(s[i...i+l-1]) = (sum_{j=0}^{l-1} s[i+j]*S^{l-1-j}) mod p
+
+h unterscheidet sich von h' in zwei Punkten: 
+  1. wir addieren zum Index im String immer i (weil es sich um einen 
+     Teilstring handelt), und 
+  2. die Potenzen von S sind jetzt fallend statt steigend (das macht 
+    die Formel unten angenehmer).
+
+Der springende Punkt ist nun die folgende Beziehung:
+
+  h(s[i+1...i+l]) = (S*h(s[i...i+l-1])-s[i]*S^l+s[i+l]) mod p
+
+Das heisst: 
+  *wenn wir h(s[i...i+l-1]) kennen, koennen wir
+  h(s[i+1...i+l]) mit O(1) Operationen berechnen.*
+(beachte: S^l muessen wir nur einmal ausrechenen und speichern).
+
+Daraus folgt: wir koennen h(s[1...l]), h(s[2...l+1]), ..., h(s[k-l, l)] sowie
+h(t) in Gesamtzeit O(k+l) berechnen, und heuristisch gesehen sollte der
+Algorithmus von Rabin-Karp nun O(k+l) Zeit benoetigen, da wir hoffen, 
+dass Kollisionen selten sind. (Genauer besteht die Idee fuer die 
+Laufzeitanalyze darin, p = Theta(l) zu waehlen. Dann sollte die
+Wahrscheinlichkeit einer Kollision etwa 1/l betragen, so dass man 
+nur in jedem l. Schleifendurchlauf den Stringvergleich durchfuehren
+muss, was zu konstanter amortisierter Zeit pro Schleifendurchlauf
+fuehrt.)
+
+Bemerkungen:
+  1. Wenn man den Algorithmus implementiert, sollte man bei der Berechnung
+     von h nach jeder Multiplikation das Ergebnis (mod p) nehmen und sicher
+     stellen, dass p^2 nicht zu gross ist, um Ueberlaeufe zu vermeiden.
+  2. Wenn man p geeignet zufaellig waehlt, kann man erreichen, dass der
+     Algorithmus von Rabin-Karp O(k+l) Zeit im Erwartungswert benoetigt.
+  3. Es gibt andere Algorithmen zur Suche in Zeichenketten, die O(k+l)
+     worst-case-Zeit erreichen (Knuth-Morris-Pratt, Boyer-Moore, Suffix-Baeume).
+     Diese sind aber zT bedeutend komplizierter.
+  4. Die Idee, Strings durch Hashfunktionen darzustellen/zu approximieren ist
+     sehr fruchtbar und hat viele Anwendungen (sichere Speicherung von Passwoertern,
+     digitale Unterschriften, Verifikation von Downloads, ...)
+\end{verbatim}
+
+\subsection{Spieltheorie}

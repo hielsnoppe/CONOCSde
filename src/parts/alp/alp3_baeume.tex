@@ -1,0 +1,203 @@
+\section{Bäume}
+\label{sec:Baeume}
+
+Zu jeder der Datenstrukturen werden im Folgenden alle Operationen eines geordneten Wörterbuches für Elemente $e$ definiert,
+die in einer konkreten Implementierung eines Wörterbuches die Schlüssel darstellen.
+Zusätzlich müssen dann Verweise auf die jeweils zu einem Schlüssel gehörigen Werte gespeichert werden.
+Wie das im Einzelnen realisiert werden kann, ist an den jeweiligen Stellen erläutert.
+
+\begin{center}
+\begin{tabular}{|p{.4\linewidth}|p{.5\linewidth}|}
+\hline
+Datenstruktur		& Laufzeiten	\\\hline\hline
+\paragraph{Binäre Suchbäume}
+&
+\\\hline
+\paragraph{AVL Bäume}
+&
+$$\mathcal{O}(\log n)$$
+\\\hline
+\paragraph{Rot-Schwarz-Bäume}
+&
+\\\hline
+\paragraph{$(a, b)$-Bäume}
+&
+\\\hline
+\paragraph{Heaps}
+&
+$$\mathcal{O}(\log n)$$
+\\\hline
+\paragraph{Tries}
+&
+\\\hline
+\paragraph{Skip-Listen}
+&
+\\\hline
+\end{tabular}
+\end{center}
+
+\subsection{Binäre Suchbäume}
+
+Operationen jeweils einmal rekursiv und einmal iterativ
+\paragraph{Einfügen}
+\paragraph{Suchen}
+\paragraph{Löschen}
+
+\subsection{AVL-Bäume}
+AVL-Bäume sind binäre Suchbäume, die einem weiteren Kriterium genügen.
+Sie vermeiden es nämlich, dass der Baum "`entartet"', also besonders stark ungleichmäßig wächst.
+Dadurch verbessert sich die Laufzeit der Operationen auf ihnen.
+Die Operationen \textit{Einfügen}, \textit{Suchen} und \textit{Löschen} werden ebenso durchgeführt,
+wie in einfachen binären Suchbäumen.
+Um jedoch eine Entartung zu vermeiden,
+wird ein entstehendes Ungleichgewicht nach dem \textit{Einfügen} oder \textit{Löschen} durch Rotationen ausgegleichen.
+Dabei bleibt die binäre-Suchbaum-Eigenschaft erhalten.
+
+\paragraph{Rotation, Doppel-Rotation}
+
+\subsection{Rot-Schwarz-Bäume}
+Ein anderes Konzept um die Entartung von binären Suchbäumen zu vermeiden, sind Rot-Schwarz-Bäume.
+In ihnen werden jedem Knoten eine Farbe, rot oder schwarz,
+zugewiesen und darüber erweiterte Anforderungen an die Struktur des Baumes gestellt:
+\begin{itemize}
+	\item Die Wurzel des Baumes ist immer schwarz.
+	\item Die $\bot$-Knoten sind immer schwarz.
+	\item Die Nachfolger roter Knoten sind schwarz.
+	\item Auf dem Pfad von der Wurzel zu jedem $\bot$-Knoten liegen immer gleich viele schwarze Knoten.
+\end{itemize}
+
+Java-Applet unter http://fbim.fh-regensburg.de/~saj39122/gikasch/start.html
+
+\paragraph{Suchen} Die Suche in einem Rot-Schwarz-Baum verläuft wie in jedem binären Suchbaum.
+Ihre asymptotische Laufzeit liegt in $\mathcal{O}(...)$.
+\paragraph{Einfügen}
+\paragraph{Löschen}
+
+\subsection{$(a, b)$-Bäume}
+Anders als die vorigen Baumstrukturen sind $(a, b)$-Bäume keine binäre Stuktur und wachsen nicht von der Wurzel in Richtung ihrer Blätter, sondern umgekehrt.
+Anstelle von zwei möglichen Kindern haben die Knoten eines $(a, b)$-Baumes zwischen $a$ und $b$ (jeweils einschließlich, $a, b \in \mathbb{N}$) viele Kinder.
+Eine Ausnahme ist die Wurzel, die 2 bis $b$ viele Kinder hat.
+Weiterhin enthalten die Knoten selbst zwischen $a-1$ und $b-1$ (s.o.) viele Schlüssel.
+Die Suchbaumeigenschaft findet sich darin wieder,
+dass die Schlüssel in sortierter Reichenfolge gespeichert werden und die Verweise auf die Kinder zwischen den einzelnen Schlüsseln angelegt sind.
+Alle Schlüssel eines Kindes sind also größer als der Schlüssel links und kleiner als der Schlüssel rechts von dem Verweis auf das Kind.
+
+\paragraph{Suchen} Die Suche in einem $(a, b)$-Baum hat eine asymptotische Laufzeit in $\mathcal{O}(\log n)$.
+
+\paragraph{Einfügen} Neue Werte werden in einem $(a, b)$-Baum immer in einem Blatt eingefügt.
+Wenn dieses durch den neuen Schlüssel "`überläuft"',
+so wird es geteilt und ein Schlüssel daraus in einen übergeordneten Knoten verschoben.
+Siehe dazu die Operation \textit{Teilen}.
+
+Das Einfügen hat eine asymptotische Laufzeit in $\mathcal{O}(...)$.
+
+\paragraph{Löschen} Gelöscht werden Werte immer aus den Blättern.
+Um einen Wert aus einem inneren Knoten zu löschen,
+wird dieser zuerst mit seinem symmetrischen Vorgänger bzw. Nachfolger ersetzt.
+Dieser ist immer ein Blatt, sodass er problemlos seine ursprüngliche Position verlassen kann.
+In beiden Fällen ist es jedoch möglich, dass anschließend das Blatt, aus dem gelöscht wurde, zu wenige Werte enthält.
+Man sagt auch, er "`läuft unter"' analog dazu, wenn ein Knoten überläuft.
+Um die Struktur des Baumes dann wieder herzustellen, gibt es unterschiedliche Balancierungsoperationen:
+
+\subparagraph{Auffüllen} (Auch Leihen oder Rotation) Dabei wird ein Wert aus dem Elternknoten in den unterlaufenen Knoten abgegeben.
+Um dies wieder auszugleichen wird versucht,
+einen Wert von einem benachbarten Geschwisterknoten des unterlaufenen Knotens in den Elternknoten zu verschieben.
+Wenn dieser dann aber selbst nicht mehr ausreichend Werte enthält,
+wird durch einen Knoten aus dem nächsthöheren Elternknoten ausgegelichen.
+Dieser muss dann wiederum durch die gleichen Operationen ausbalanciert werden.
+
+\paragraph{Teilen} Wenn ein Knoten überläuft, so muss er geteilt werden.
+Dazu wird der mittlere Wert aus dem übergelaufenen Knoten in dessen Elternknoten eingefügt und alle Werte links und rechts davon in jeweils einen neuen Knoten gespeichert,
+der links bzw. rechts von dem aufgestiegenen Wert in dem Elternknoten steht.
+
+\subsection{Heaps}
+\label{subsec:Heaps}
+
+Unterscheidung Min-Heap und Max-Heap.\\
+Heapbedingung: Alle Kinder eines Knotens größer (Min-Heap) bzw. kleiner (Max-Heap) als Eltern-Knoten.\\
+Implementierung als (binärer) Baum verlinkt, oder mit (dynamischem) Array.\\
+Als Sonderfall Treaps, die bezüglich zweier Werte einmal Heap- und einmal Binäre-Suchbaum-Eigenschaft haben.
+
+\subsection{Tries}
+\label{subsec:Tries}
+
+Tries sind eine Möglichkeit, um Zeichenketten (engl. \textit{strings}) effizient zu verwalten.
+Man kann die gespeicherten Zeichenketten auch als Schlüssel für andere Daten verwenden und so ein geordnetes Wörterbuch implementieren.
+
+Die Struktur von Tries sind Bäume, bei denen einzelne Zeichen der Zeichenketten in den Kanten zwischen den Knoten gespeichert werden.
+Die Knoten selbst enthalten keine Werte.
+Man kann aber beispielsweise die Blätter dazu nutzen Verweise zu speichern, um ein Wörterbuch zu implementieren.
+Weiterhin wird zusätzlich zu den Zeichenketten als letztes Zeichen jeweils ein Symbol eingefügt, das das Wortende markiert.
+Hier soll dafür das \EURdig-Zeichen dienen.
+
+\begin{figure}[h]%[htbp]
+%\includegraphics{unkomprimiertertrie.png}
+\caption{unkomprimierter Trie}
+\label{fig:UnkomprimierterTrie}
+\end{figure}
+
+Um besonders die Suche in Tries zu beschleunigen, kann man komprimierte Tries (auch Patricia-Tries, von engl. \textit{Practical Algorithm to Retrieve Information Coded in Alphanumeric}) einsetzen.
+Dabei werden mehrere Kanten, die auf einem Pfad liegen, von dem keine Verzweigungen ab gehen, zu einer zusammengefasst.
+
+\begin{figure}[h]%[htbp]
+%\includegraphics{komprimiertertrie.png}
+\caption{komprimierter Trie}
+\label{fig:KomprimierterTrie}
+\end{figure}
+
+Tries können auch als Suffixbaum zum Suchen in Zeichenketten verwendet werden.
+Mehr dazu findet sich im Abschnitt über die Arbeit mit Zeichenketten (\ref{subsec:ArbeitenMitZeichenketten}).
+
+\subsubsection{Operationen}
+
+\paragraph{put $e$}
+\paragraph{get $e$}
+\paragraph{remove $e$}
+\paragraph{min}
+\paragraph{max}
+\paragraph{succ $e$}
+\paragraph{pred $e$}
+
+%\subsection{Rank-balanced Trees}
+%http://www.cs.princeton.edu/~sssix/papers/rb-trees.pdf
+
+\subsection{Skip-Listen}
+\label{subsec:SkipListen}
+
+Skip-Listen sind eine sogenannte "`randomisierte Datenstruktur"'.
+Das bedeutet, dass ihre Struktur zwar grundsätzlich festgelegt ist,
+jedoch durch die gezielte Verwendung von zufälligen Entscheidungen das genaue Aussehen nicht eindeutig ist.
+Auch wenn also mehrfach die gleichen Daten in der gleichen Reihenfolge gespeichert werden,
+kann die Datenstruktur jeweils unterschiedlich aussehen.
+
+Die Grundlage für Skip-Listen bilden mehrere einfach verkettete Listen,
+die als Ebenen übereinander liegend betrachtet werden.
+Auf der untersten Ebene werden Elemente wie in einer normalen sortierten verketteten Liste verwaltet.
+
+Jedes Element kann aber auch in einer zufälligen Anzahl von Ebenen darüber redundant gespeichert sein.
+Neben einem Verweis auf seinen Nachfolger innerhalb der Ebene hat es dann auch einen Verweis auf seinen Repräsentanten in der darunterliegenden Ebene.
+
+\begin{figure}[h]%[htbp]
+%\includegraphics{skiplist.png}
+\caption{Skip-Liste}
+\label{fig:SkipListe}
+\end{figure}
+
+Dabei verhält es sich so, dass je höher eine Ebene ist,
+desto geringer die Wahrscheinlichkeit für ein bestimmtes Element ist, in dieser Ebene vorhanden zu sein.
+Dadurch enthalten die höheren Ebenen weniger Elemente als die niedrigeren und können mit weniger Schritten durchlaufen werden.
+Diese Eigenschaft ermöglicht es, effiziente Operationen auf der Datenstruktur zu implementieren.
+
+Zur Implementierung eines Wörterbuches kann man zu jedem Element auf der untersten Ebene einen Verweis auf den dazugehörigen Wert speichern.
+
+\subsubsection{Operationen}
+
+\paragraph{put $e$}
+\paragraph{get $e$}
+\paragraph{remove $e$}
+\paragraph{min}
+\paragraph{max}
+\paragraph{succ $e$}
+\paragraph{pred $e$}
+
+\subsubsection{Mathematische Grundlagen}

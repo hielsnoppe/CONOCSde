@@ -1,11 +1,17 @@
-EN: This repository yields course notes from my (http://www.nielshoppe.de)
-bachelor studies on computer science at Freie Universität Berlin
-(http://inf.fu-berlin.de). They are mostly in german language.
-I like to have them as complete, correct and understandable as possible for
-me and others to benefit from. Any support appreciated.
+EN: This project yields course notes from my [1] bachelor studies on computer
+science at Free University of Berlin [2]. They are mostly in german language.
+I like to have them as complete, correct and understandable as possible for me
+and others to benefit from. Any support appreciated.
 
-DE: Dieses Projekt enthält meine Kursunterlagen aus dem Bachelor-Studium der
-Informatik an der Freien Universität Berlin (http://inf.fu-berlin.de). Sie
-sind überwiegend in deutscher Sprache.
-Ich möchte sie so vollständig, korrekt und verständlich wie möglich haben,
-damit ich und andere davon profitieren können.
+DE: Dieses Projekt enthält Kursunterlagen aus meinem [1] Bachelor-Studium der
+Informatik an der Freien Universität Berlin [2]. Sie sind überwiegend in
+deutscher Sprache.
+Ich möchte sie so vollständig, korrekt und verständlich wie möglich haben, damit
+ich und andere davon profitieren können. Jede Unterstützung ist willkommen.
+
+License: (CC) BY-NC-SA [3]
+
+
+[1] http://www.nielshoppe.de
+[2] http://inf.fu-berlin.de
+[3] http://creativecommons.org/licenses/by-nc-sa/3.0/

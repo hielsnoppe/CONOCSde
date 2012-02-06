@@ -1,0 +1,39 @@
+\documentclass[german]{scrbook}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{algo}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{marvosym}
+%\usepackage[T1]{fontenc}
+\usepackage[pdftex, bookmarks=true, bookmarksnumbered=true]{hyperref}
+
+% convenience
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Zahl}{\mathbb{Z}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\LandauO}{\mathcal{O}}
+\newcommand{\Landauo}{\mathcal{o}}
+\newcommand{\LandauOmega}{\Omega}
+\newcommand{\Landauomega}{\omega}
+\newcommand{\LandauTheta}{\Theta}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\abs}[1]{\left|#1\right|}
+
+\title{Studium der Informatik}
+\subtitle{Algorithmen und Programmierung}
+\author{Niels Hoppe}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{parts/alp.tex}
+
+\bibliography{references.bib}{}
+\bibliographystyle{plain}
+
+\end{document}

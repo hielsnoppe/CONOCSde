@@ -1,0 +1,308 @@
+%
+%
+%
+\section{Einführung}
+Software; Softwaretechnik (SWT); Aufgaben der SWT; Beteiligte;
+Gütemaßstab: Kosten/Nutzen; Qualität; Produkt und Prozess; Prinzip, Methode, Verfahren, Werkzeug;
+technische vs. menschliche Aspekte; Arten von SWT-Situationen; Lernziele; Lernstil
+"Merke"-Hinweise zu: Domänen, nichtfunktionalen Anforderungen, Kooperationsbedarf,
+Projektrisiko.
+
+Die Welt der Softwaretechnik
+Routine und Innovation: Normales und radikales Vorgehen; Taxonomie: Probleme und Lösungen 
+
+\section{Modellierung und UML}
+Modelle und Modellierung (Realität vs. Modell; Phänomene vs. Konzepte); UML;
+
+Klassendiagramme
+Klassen, Attribute, Methoden
+Vererbung, Aggregation, Komposition
+
+Objektdiagramme
+
+Sequenzdiagramme
+
+Zustandsdiagramme (statechart)
+
+Aktivitätsdiagramme
+
+Anwendungsfalldiagramme
+
+Komponentendiagramme
+
+Kollaborationsdiagramme,
+Inbetriebnahmediagramme,
+Kommunikationsdiagramme,
+Interaktions-Übersichts-Diagramme
+
+UML Metamodell; Profile;
+Notationsdetails
+(Klassen, Assoziationen, Schnittstellen, Zustände) 
+
+\section{Ermitteln WAS}
+
+\subsection{Anforderungsbestimmung}
+Erhebung (Requirements Elicitation): Anforderungen und Anforderungsbestimmung
+(Requirements Engineering); Arten von Anforderungen; Anforderungen und Modellierung;
+Harte und weiche Systeme; Probleme und Chancen erkennen;
+Erhebungstechniken (herkömmliche, darstellungs-basierte, soziale, wissenserhebende) 
+
+\subsubsection{Anwendungsfälle (Use Cases)}
+
+Was ist ein Use Case?;
+Wichtige Parameter (Bereich, Detailgrad/Zielniveau);
+schrittweise Präzisierung;
+Use-Case-Hierarchien (Überblick, Benutzerziele, Details);
+SuD System under discussion
+
+Checkliste für Use Cases
+\begin{description}
+\item[Titel]
+\begin{itemize}
+	\item Aktive Verbalphrase, die das Ziel des Hauptakteurs nennt?
+	\item Ist das SuD für die Zielerreichung "zuständig"?
+	\end{itemize}
+\item[Bereich (SuD)]
+\begin{itemize}
+	\item Angegeben?
+	\item Wenn das SuD entworfen werden muss, müssen (a) alle Teile entworfen werden und (b) nichts außerhalb (Systemgrenze)?
+	\end{itemize}
+\item[Detailgrad/Zielniveau]
+\begin{itemize}
+	\item Liegt das Ziel wirklich auf diesem Niveau?
+	\item Passt der Inhalt zum geplanten Detailgrad?
+	\end{itemize}
+\item[Hauptakteur]
+\begin{itemize}
+	\item Hat er/sie/es Verhalten?
+	\item Hat er/sie/es ein Ziel, das zu einer Dienstzusicherung des SuD passt?
+	\end{itemize}
+\item[Voraussetzungen]
+\begin{itemize}
+	\item Sind sie verbindlich und herstellbar?
+	\item Werden sie im Use Case nicht mehr überprüft?
+	\end{itemize}
+\item[Beteiligte und ihre Interessen]
+	Muss das SuD in diesem Use Case diese Interessen bedienen?
+\item[Mindestzusicherungen]
+	Sind die Interessen aller Beteiligten angemessen geschützt?
+\item[Zusicherungen im Erfolgsfall]
+	Sind die Interessen aller Beteiligten befriedigt?
+\item[Haupt-Erfolgsszenario]
+\begin{itemize}
+	\item Hat es 3 bis 9 Schritte?
+	\item Beschreibt es den Ablauf vom Auslöser bis zur Erfolgsgarantie?
+	\item Erlaubt es ggf. geeignete Abwandlungen in der Reihenfolge?
+	\end{itemize}
+\item[Jeder Einzelschritt]
+\begin{itemize}
+	\item Ist er als erreichtes Ziel formuliert?
+	\item z.B. "validieren", nicht: "prüfen"
+	\item Treibt er den Prozess sichtbar voran?
+	\item Ist klar, wer der handelnde Akteur ist?
+	\item Ist die Absicht des Akteurs klar?
+	\item Abstrahiert der Schritt von der Bedienschnittstelle?
+	\item Ist erkennbar, welche Information verarbeitet wird?
+	\end{itemize}
+\item[Erweiterungsbedingungen]
+\begin{itemize}
+	\item Kann das SuD diesen Fall entdecken (falls nötig)?
+	\item Muss das SuD diesen Fall behandeln?
+	\end{itemize}
+\item[Inhalt des Use Cases insgesamt]
+\begin{itemize}
+	\item Gegenüber den Beteiligten: "Ist dies, was Du möchtest?",
+	"Kannst Du später entscheiden, ob es richtig gebaut wurde?"
+	\item Gegenüber den Entwicklern: "Kannst Du das bauen?"
+	\end{itemize}
+\end{description}
+
+Anwendungsfalldiagramme
+
+\section{Verstehen WAS}
+
+\subsection{Analyse (statisches Objektmodell)}
+Von Use-Cases zu Klassen,
+
+Abbott's Methode (Substantive sind Kandidaten für Klassen, Verben für Operationen,
+Adjektive für Attribute, Eigennamen für Objekte, "ist ein" für Vererbung etc.);
+
+Checklisten zur Identifikation von Klassen, Assoziationen, Attributen, Operationen, Vererbung;
+Entwicklerrollen und Modellarten (Analysemodell vs. Entwurfsmodell) 
+
+\subsection{Analyse (dynamisches Objektmodell)}
+Klassen finden mit dynamischer Modellierung; Zustandsdiagramme (statechart diagrams);
+Sequenzdiagramme; Aufbau eines Anforderungsanalyse-Dokuments;
+Validierung (und Gegensatz zu Verifikation) 
+
+\section{Entscheiden WIE}
+
+\subsection{Software-Architektur}
+Architektur=Gesamtstruktur; Erfüllen nichtfunktionaler und funktionaler Anforderungen;
+globale Eigenschaften; wiederverwendbare Architekturen (Standard-Architekturen);
+Architekturstile (zum Selbstentwickeln von Architekturen);
+Modularisierung (Modulbegriff, Aufteilungskriterien)
+
+Es gibt für eine Reihe wiederkehrender Mengen
+nichtfunktionaler Anforderungen etablierte SW-Architekturen
+oder zumindest Architekturstile
+\begin{itemize}
+\item Klient-/Dienstgeber-Architektur (client/server arch.)
+\item eine einfache Sorte verteilter Architekturen
+\item Ereignisgesteuertes System (event-based arch.)
+\item eine Sorte lose gekoppelter Architekturen
+\item Ablage-basierte Architektur (repository arch.)
+\item noch eine Sorte lose gek. A.; oft mit Ereignissteuerung verbunden
+\item Unterbrechungsorientiertes System (interrupt-based system)
+\item eine Architektur für kleinere Echtzeitsysteme
+\item Mehrschicht-Architektur (layered arch.)
+\item ein allgemeiner A.stil, der mit vielen anderen A.ideen verbunden werden kann
+\item JavaEE-Architektur, CORBA-Architektur, .NET-Architektur
+\item technologiezentrierte Architekturen
+\end{itemize}
+
+\subsection{Modularisierung}
+Modulbegriff; Kriterien für Aufteilung;
+Fallstudie: KWIC;
+KWIC 1: Datenflusskette; Einschätzen der Entwurfsqualität;
+KWIC 2: Zentrale Steuerung;
+KWIC 3: Datenabstraktion; Verhalten bei Änderungen; Verwandtschaft mit Architekturstilen 
+
+\subsection{Entwurfsmuster}
+Was macht ein Problem schwierig?; Einfachheit durch Wiedererkennen von Mustern;
+Idee von Entwurfsmustern;
+Kompositum-Muster (composite pattern);
+Adapter-Muster (adapter pattern);
+Brücken-Muster (bridge pattern);
+Fassaden-Muster (facade pattern) 
+
+Arten von Entwurfsmustern;
+Stellvertreter-Muster (proxy pattern);
+Kommando-Muster (command pattern);
+Beobachter-Muster (observer pattern);
+Strategie-Muster (strategy pattern);
+Abstrakte-Fabrik-Muster (abstract factory pattern);
+Erbauer-Muster (builder pattern) 
+
+\subsection{Schnittstellenspezifikation}
+Sichtbarkeiten (public, protected, private, package),
+Spezifikation von Voraussetzungen (preconditions) und Wirkungen (postconditions) mit OCL
+(context, pre, post, inv);
+Abbildung von Assoziationen in Code
+
+\subsection{Qualitätssicherung}
+
+Analytische Qualitätssicherung
+Defekttest;
+Auswahl der Eingaben (Funktionstest, Strukturtest); Auswahl der Testgegenstände (bottom-up, top-down, opportunistisch);
+Ermittlung des erwarteten Verhaltens (Referenzsystem, (Teil)Orakel); Wiederholung von Tests (Rückfalltesten, Testautomatisierung) 
+Testautomatisierung (Werkzeuge, Strukturierung, JUnit);
+Stoppkriterien für das Testen;
+Defektortung;
+Benutzbarkeitstest;
+Lasttest;
+Akzeptanztest;
+manuelle statische Prüfung (Durchsicht; Inspektion; Perspektiven-basiertes Lesen);
+automatische statische Prüfung (Modellprüfung; Quelltextanalyse) 
+
+Konstruktive Qualitätssicherung (Qualitätsmgmt., Prozessmgmt.)
+Projekt- vs. Prozessmgmt.;
+Arten von Prozessmgmt.-Leitlinien;
+CMM-SW/CMMI (5 Prozessreifestufen);
+Total Quality Management (TQM) (Prinzip: Kundenzufriedenheit); ISO 9000 
+
+\subsection{Prozessmodelle}
+
+Bestandteile eines Prozessmodelles:
+
+Rollen
+\begin{itemize}
+\item Welche gibt es und wie genau sind sie definiert ("Arbeitsbeschreibungen")?
+\end{itemize}
+
+Aktivitäten
+\begin{itemize}
+\item Welche sind vorgesehen? Wie genau sind sie definiert?
+\item Entscheidungsspielraum über Einsatz oder Art des Einsatzes?
+\item Gibt es Checklisten? Vorgaben über Werkzeuge, Methoden, Richtlinien?
+\end{itemize}
+
+Artefakte
+\begin{itemize}
+\item Welche sind vorgesehen? Wie genau sind sie definiert? Wie verbindlich ist das?
+\item Gibt es Vorlagen (Schablonen)?
+\end{itemize}
+
+Steuerung der Aktivitäten
+\begin{itemize}
+\item Gibt es einen festen Ablaufplan? Oder weichere Kriterien für die Abfolge von Aktivitäten?
+\item Sind Eintritts- und Austrittsbedingungen definiert?
+\end{itemize}
+
+Prozessmodell-Auswahlkriterien
+
+\subsubsection{Wasserfallmodell}
+
+Das Wasserfallmodell ist ein lineares (nichtiteratives) Vorgehensmodell in der Softwareentwicklung, bei dem der Softwareentwicklungsprozess in Phasen organisiert wird.
+Dabei gehen die Phasenergebnisse wie bei einem Wasserfall immer als bindende Vorgaben für die nächsttiefere Phase ein.
+
+Im Wasserfallmodell hat jede Phase vordefinierte Start- und Endpunkte mit eindeutig definierten Ergebnissen.
+In Meilensteinsitzungen am jeweiligen Phasenende werden die Ergebnisdokumente verabschiedet.
+Zu den wichtigsten Dokumenten zählen dabei das Lastenheft sowie das Pflichtenheft.
+
+\begin{enumerate}
+\item Planung
+\item Anforderungsbestimmung
+\item Architekturentwurf
+\item Feinentwurf
+\item Implementierung
+\item Integration
+\item Validierung
+\item Inbetriebnahme
+\end{enumerate}
+
+\subsubsection{Prototypmodell}
+
+\subsubsection{Evolutionäre Modelle}
+
+\subsubsection{Spiralmodell}
+
+\subsubsection{Flexiblere Planung (Agile Methoden)}
+
+\subsubsection{Anpassbare Prozessmodelle}
+Rational Unified Process (RUP)
+V-Modell XT;
+Erklärung "Agile Methode" (XP) 
+
+
+\subsection{Projektmanagement}
+Was und wofür?; Aufgabenfelder;
+Schätzen (Schätzverfahren; Funktionspunktschätzung); Todesmarschprojekte 
+Zeit- und Ressourcenplanung;
+Microsoft Project;
+Critical Path Method (CPM);
+Finden von Aufgabenzerlegungen;
+Risikomanagement; Risikolisten; DOs and DON'Ts 
+
+Teams; Sportteam oder Chor?; Organisationsstrukturen; Rollen; Kommunikationsstrukturen;
+psychologische Faktoren; Schätzen von Wahrscheinlichkeiten;
+Motivation; Attribution; Haltungen; soziale Einflüsse 
+Projektplan; Projektleitung;
+
+nichtlineare Dynamik (Brook's Gesetz; Selbstverstärkung von Qualitätsmängeln;
+Teufelskreis von Qualität und Zeitdruck);
+Kommunikation (geplant/ungeplant, synchron/asynchron); Medien; Besprechungen 
+
+Normales Vorgehen maximieren: Wiederverwendung
+Arten der Wiederverwendung (Produkt/Prozess; Gegenstand; Ziel);
+Risiken und Abwägung; Hindernisse; Produktivität; Wiederverwendung für normales Vorgehen;
+Muster; Arten von Mustern;
+Prinzipien (Abstraktion, Strukturierung, Hierarchisierung, Modularisierung, Lokalität, Konsistenz, Angemessenheit, Wiederverwendung, Notationen);
+Analysemuster 
+Benutzbarkeitsmuster; Prozessmuster; Mustersprachen; Anti-Muster; Werkzeuge 
+
+Wissen weitergeben:
+Dokumentation
+Arten von Dokumentation; Qualitätseigenschaften (übersichtlich, präzise, korrekt, hilfreich);
+positive und negative Beispiele; Prinzipien (Selbstdokumentation, Minimaldokumentation);
+Begründungsmanagement (Fragen + Vorschläge + Kriterien + Argumente ergeben Entscheidungen) 

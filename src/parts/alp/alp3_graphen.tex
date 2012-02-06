@@ -1,0 +1,346 @@
+\section{Graphen}
+Implementierung als Adjazenzliste oder Adjazenzmatrix oder verlinkt.
+
+\begin{center}
+\begin{tabular}{|p{.4\linewidth}|p{.5\linewidth}|}
+\hline
+Algorithmus		& Laufzeit	\\\hline\hline
+\paragraph{Breitensuche}
+&
+\\\hline
+\paragraph{Tiefensuche}
+&
+\\\hline
+\paragraph{Topologische Sortierung}
+&
+$$\mathcal{O}(n) \mbox{\quad average, \quad} \mathcal{O}(n^2) \mbox{\quad worst}$$
+\\\hline\hline
+\paragraph{Dijkstra}
+Knoten mit Entfernung zum Startknoten in Prioritätswarteschlange
+&
+$$\mathcal{O}(|V| \cdot (T_{enqueue} + T_{dequeue})$$
+$$ + |E| \cdot T_{decreaseKey})$$
+$$\mathcal{O}(|V| \cdot \log |V| + |E| \cdot \log |V|)$$
+\\\hline
+\paragraph{A*}
+Dijkstra mit Heuristik $h$ (zulässig, monoton/konsistent):
+\begin{itemize}
+\item $\forall v \in V: h(v) \leq d(v)$
+\item $\forall (v, w) \in E: h(v) \leq |(v, w)| + h(w)$
+\end{itemize}
+&
+\\\hline
+\paragraph{Bellman-Ford}
+iteriert $|V|-1$ mal über alle Kanten
+&
+$$\mathcal{O}(|V| \cdot |E|)$$
+$$\mathcal{O}(|V|^2 \cdot |E|)$$
+\\\hline
+\paragraph{Floyd-Warshal}
+iteriert $|V|$ mal über Adjazenzmatrix
+&
+$$\mathcal{O}(|V|^3)$$
+\\\hline\hline
+\paragraph{Prim-Jarnik-Dijkstra}
+ZSHK wächst von einem Startknoten aus
+&
+\\\hline
+\paragraph{Kruskal}
+Wählt aus den leichtesten Kanten, die ZSHKs verbinden
+&
+\\\hline
+\paragraph{Borouvka}
+Iteriert über ZSHKs
+&
+\\\hline
+\end{tabular}
+\end{center}
+
+\subsection{Breitensuche}
+\label{subsec:Breitensuche}
+
+Rekursiver Algorithmus zur Breitensuche
+
+\begin{algorithm}{BFS}[G]{
+	\qinput{}
+	\qoutput{}
+}
+Q \qlet new Queue\\ % nach 210: Queue ersetzen mit PriorityQueue()
+s.found \qlet \qtrue\\
+s.d \qlet 0\\
+s.pred \qlet \qnil\\ % eingefügt nach z(=enz) 190
+Q.enqueue(s)\\
+\qwhile \qnot Q.isEmpty()\\
+	v \qlet Q.dequeue()\\
+	\qfor $e$ in v.incidentEdges\\
+		$w$ \qlet e.opposite(v)\\
+		\qif \qnot w.found\\
+			\qthen
+				w.found \qlet \qtrue\\
+				w.d \qlet v.d+1\\
+				w.pred \qlet v\\% enz190*\ \*ab210 replaced  w.d<-v.d+elength;w.pred<-v;*\
+				Q.enqueue(v)% nach 210: replaced mit Q.insert(w,w.d)
+		\qfi
+	\qrof
+\qelihw
+\end{algorithm}
+
+\subsection{Tiefensuche}
+\label{subsec:Tiefensuche}
+
+Rekursiver Algorithmus zur Tiefensuche
+
+\begin{algorithm}{DFS}[v_{start}]{
+	\qinput{Startknoten $v_{start}$ in einem Graphen}
+	\qoutput{}
+}
+process(v)\\
+$v$.visited \qlet \qtrue\\
+\qfor all $w$ adjacent to $v$\\
+	\qif \qnot $w$.visited\\
+		\qthen DFS($w$) \qfi
+\qrof
+\end{algorithm}
+
+Iterativer Algorithmus zur Tiefensuche
+
+\begin{algorithm}{DFS}[]{
+	\qinput{}
+	\qoutput{}
+}
+s \qlet new Stack\\
+s.found \qlet \qtrue\\
+s.push((s,s.incidentEdges()))\\
+\qwhile \qnot s.isEmpty(), (v, e) \qlet s.top()\\
+        \qif e.hasNext()\\
+		\qthen w \qlet e.next().opposite(v)\\
+		\qelse w \qlet \qnil
+	\qfi\\
+	\qwhile w != \qnil \qand w.found\\
+		\qif w = \qnil\\
+			\qthen s.pop()\\
+			\qelse
+				v.found \qlet \qtrue\\
+				s.push(w, w.incidentEdges())
+		\qfi
+	\qelihw
+\qelihw
+\end{algorithm}
+
+\subsection{Topologische Sortierung}
+\label{subsec:TopologischeSortierung}
+
+Eine topoligische Sortierung ist eine Anordnung von Knoten eines Graphen,
+bei der keine Kanten von Knoten zu anderen Knoten verlaufen, die vor ihnen angeordnet sind.
+Es sind nur azyklische Graphen topologisch sortierbar.
+
+\subsection{Kürzeste Wege}
+\label{subsec:KuerzesteWege}
+
+Bei der Suche nach kürzesten Wegen gibt es einige unterschiedliche Teilprobleme:
+\begin{itemize}
+\item \textbf{single-pair shortest path}
+Der kürzeste Pfad zwischen zwei unterschiedlichen Knoten.
+\item \textbf{single-source shortest path (SSSP)}
+Der kürzeste Pfad zwischen einem Startknoten und allen anderen Knoten des Graphen.
+\item \textbf{single-destination shortest path}
+Der kürzeste Pfad zwischen einem Endknoten und allen anderen Knoten des Graphen.
+Dies ist eine Umkehrung des SSSP und kann durch eine Umkehrung der Kantenrichtungen erreicht werden.
+\item \textbf{all-pairs shortest path (APSP)}
+Der kürzeste Pfad, von jedem Knoten im Graph, zu jedem anderen Knoten.
+\end{itemize}
+
+Kürzeste Wege in einem Graphen können gut durch einen Baum dargestellt werden,
+indem zu jedem Knoten ein Verweis auf seinen Vorgänger gespeichert wird.
+Es gibt verschiedene Algorithmen, die einige oder alle dieser Teilprobleme lösen und einen solchen Baum erzeugen:
+
+TODO: Teilpfadoptimalität
+
+\subsubsection{Dijkstra}
+\label{subsubsec:Dijkstra}
+
+Der Algorithmus von Dijkstra bietet eine Lösung für das \textit{single-pair shortest path}- und das \textit{SSSP}-Problem.
+Er ist ein gieriger Algorithmus (s. \ref{subsec:GierigeAlgorithmen} Gierige Algorithmen) und funktioniert nur korrekt, wenn alle Kantengewichte positiv sind.
+
+Zu Beginn des Algorithmus erhalten alle Knoten eine Bewertung,
+die ihren minimalen Abstand vom Startknoten darstellt.
+Der Startknoten wird daher mit $0$ bewertet, alle übrigen mit $\infty$.
+Anschließend werden die Knoten in einer Prioritätswarteschlange verwaltet.
+Im weiteren Verlauf wird jedem Knoten ein Vorgänger zugewiesen werden,
+sodass in einer Implementierung auch dafür Speicher zu reservieren ist.
+
+Solange die Warteschlange nun also Knoten enthält,
+wird jeweils der am niedrigsten bewertete Knoten entnommen und eine Bewertung all seiner Nachbarn vorgenommen:
+Für jeden Nachbarn ist der neue Wert die Summe aus dem Wert des aktuellen Knotens und dem Kantengewicht zwischen den beiden Knoten.
+Nur, wenn dieser neue Wert kleiner als der alte ist,
+wird der entsprechende Nachbar aktualisiert und erhält als neuen Vorgänger den aktuellen Knoten.
+
+Zum Schluss des Algorithmus ist die Warteschlange leer und alle Knoten sind mit der Länge des kürzesten Pfades vom Startknoten zu ihnen bewertet.
+Der jeweils kürzeste Pfad lässt sich durch den gespeicherten Vorgänger eines jeden Knotens rekonstruieren.
+
+Wenn nur eine Lösung für das \textit{single-pair shortest path}-Problem gesucht wird,
+kann der Algorithmus bereits dann abgebrochen werden, wenn der aktuelle Knoten dem Ziel-Knoten entspricht.
+
+\begin{algorithm}{Dijkstra}[]{
+	\qinput{}
+	\qoutput{}
+}
+\end{algorithm}
+
+\paragraph{Laufzeit}
+Die Laufzeit des Algorithmus wird maßgeblich durch die Laufzeiten der Operationen auf der verwendeten Datenstruktur bestimmt.
+Allgemein lässt sie sich als in
+$$\mathcal{O}(|V| \cdot (T_{enqueue} + T_{dequeue}) + |E| \cdot T_{decreaseKey})$$
+liegend abschätzen.
+Legt man der Prioritätswarteschlange eine Implementierung durch einen binären Heap zu Grunde,
+ergibt sich eine Laufzeit in $\mathcal{O}(|V| \cdot \log |V| + |E| \cdot \log |V|)$.
+
+\paragraph{Beispiel}
+TODO: beispielhafte Ausführung wie in der Klausur anzuwenden
+
+\subsubsection{A*}
+\label{subsubsec:AStern}
+
+Der A*-Algorithmus ist dem Algorithmus von Dijkstra sehr ähnlich.
+Um die Laufzeit zu verbessern nutzt er jedoch zusätzlich eine Heuristik $h: V \mapsto \mathbb{R}_0^+$,
+die für jeden Knoten eine geschätzte Entfernung zum Zielknoten angibt.
+Diese Heuristik ist je nach Anwendungsfall unterschiedlich geschickt zu wählen.
+Sie hat jedoch zwei Kriterien zu erfüllen:
+\begin{enumerate}
+\item Sie muss zulässig sein, d.h. die Weglänge darf nie überschätzt werden.
+$$\forall v \in V: h(v) \leq d(v)$$
+\item Sie muss monoton oder auch konsistent sein,
+d.h. sie ist zulässig und sie muss für jeden Nachbarn eines Knotens einen mindestens so großen Abstand schätzen,
+wie die Summe aus der Kantenlänge zu diesem Nachbarn und der Schätzung für den Knoten selbst.
+$$\forall (v, w) \in E: h(v) \leq |(v, w)| + h(w)$$
+\end{enumerate}
+In einem Graphen, der eine Zwei- oder Mehr-Dimensionale Karte repräsentiert, könnte das zum Beispiel die Luftlinie, also der euklidische Abstand sein. \nocite{wiki:astar}
+
+\paragraph{Laufzeit}
+
+\paragraph{Beispiel}
+TODO: beispielhafte Ausführung wie in der Klausur anzuwenden
+
+\subsubsection{Bellman-Ford}
+\label{subsubsec:BellmanFord}
+
+Anders als der Algorithmus von Dijkstra funktioniert dieser Algorithmus auch mit negativen Kantengewichten,
+jedoch dürfen keine negativen Kreise vorhanden sein.
+Auch er löst das \textit{single-pair shortest path}- und das \textit{SSSP}-Problem durch eine Bewertung der Knoten mit ihrer Distanz zum Startknoten.
+Jedoch nutzt er keine Warteschlange, sondern iteriert über die Knoten und Kanten des Graphen.
+
+Zu Beginn werden wiederum alle Knoten mit $\infty$ bewertet und der Startknoten mit $0$.
+Anschließend wird $|V| - 1$ Mal über alle Kanten iteriert und dabei jeweils eine erneute Bewertung für den Endknoten der jeweiligen Kante vorgenommen:
+Wenn die Summe aus dem Wert des Startknotens der Kante und dem Kantengewicht kleiner ist als der Wert des Endknotens der Kante, so wird dieser mit dieser Summe als neuem Wert aktualisiert.
+
+\begin{algorithm}{BellmanFord}[]{
+	\qinput{}
+	\qoutput{}
+}
+\qfor $i = 1$ \qto $|V| - 1$\\
+	\qfor $(v_1, v_2) \in E$\\
+		\qif distance of $v_1$ $+$ weight of $(v_1, v_2)$ $<$ distance of $v_2$\\
+			\qthen distance of $v_2$ \qlet distance of $v_1$ $+$ weight of $e$
+		\qfi
+	\qrof
+\qrof
+\end{algorithm}
+
+\paragraph{Laufzeit}
+
+\paragraph{Beispiel}
+
+\subsubsection{Floyd-Warshall}
+\label{subsubsec:FloydWarshall}
+
+Der Algorithmus von Floyd und Warshall ist der erste,
+der das \textit{APSP}-Problem und damit alle Teilprobleme kürzester Wege löst.
+Sein Ansatz beruht auf der Teilpfadoptimalitätseigenschaft
+
+Knoten durchnummerieren, $n$ Tabellen $n \times n$\\
+$d_{i,j}^0 = c(i, j)$\\
+$c(i, j) = \infty$ wenn $i$ und $j$ nicht verbunden, $c(i, i) = 0$.\\
+$d_{i,j}^k = \min (d_{i,j}^{k-1}, d_{i,k}^{k-1} + d_{k,j}^{k-1})$\\
+Rekursiv. Mit dynamischer Programmierung verbessern:
+
+\begin{algorithm}{FloydWarshall}[]{
+	\qinput{}
+	\qoutput{}
+}
+$d$ \qlet ($|V| \times |V|$)-matrix\\
+\qfor $k = 1$ \qto $|V|$\\
+	\qfor $(i, j) \in |V| \times |V|$\\
+		$d_{i, j}$ \qlet $\min (d_{i, j}, d_{i, k} + d_{k, j})$
+	\qrof
+\qrof
+\end{algorithm}
+
+\paragraph{Laufzeit}
+Die Laufzeit des Algorithmus liegt in $\mathcal{O}(|V|^3)$.
+Anhand der Darstellung als Adjazenzmatrix, die alle möglichen Paare $(i, j)$ in $|V| \times |V|$ enthält,
+über die $|V|$ Mal iteriert wird, lässt sich das leicht nachvollziehen.
+
+\paragraph{Beispiel}
+TODO: beispielhafte Ausführung wie in der Klausur anzuwenden
+
+\subsection{Minimal-spannende Bäume}
+\label{subsec:MinimalSpannendeBaeume}
+
+\subsubsection{Generischer Algorithmus}
+
+Definition: Ein Schnitt von $G = (V, E)$ ist eine Zerlegung von $V$ in zwei nichtleere Teilmengen $(S, V \setminus S)$.
+
+Satz: Sei $T = (V, E')$ MST von $G = (V, E)$.
+Angenommen $e \in E$ ist Kante mit minimalem Gewicht aus $E_{s} = \{uv | u \in S, v \in v\setminus S\}$ für Schnitt $(S, V \setminus S)$,
+dann gibt es in $E'$ eine Kante $e' \in E_{S}$, so dass $|e'| \leq |e|$.
+
+\subsubsection{Prim-Jarnik-Dijkstra}
+\label{subsubsec:PrimJarnikDijkstra}
+Der Algorithmus geht von einem Startknoten $v$ aus,
+der anfangs alleine eine Zusammenhangskomponente $C$ bildet.
+Diese wird nun schrittweise um diejenigen Knoten erweitert,
+zu denen diejenige leichteste Kante führt, die aus $C$ heraus führt.
+
+\begin{algorithm}{PrimJarnikDijkstra}[G]{
+	\qinput{}
+	\qoutput{}
+}
+\end{algorithm}
+
+\paragraph{Laufzeit}
+
+\paragraph{Beispiel}
+
+\subsubsection{Kruskal}
+\label{subsubsec:Kruskal}
+Der Algorithmus betrachtet anfangs jeden Knoten als eine eigene Zusammenhangskomponente.
+Er fügt dann solange jeweils diejenigen leichtesten Kanten ein,
+die zwei unterschiedliche Zusammenhangskomponenten verbinden,
+bis es nur noch eine Zusammenhangskomponente gibt.
+
+\begin{algorithm}{Kruskal}[G]{
+	\qinput{}
+	\qoutput{}
+}
+\end{algorithm}
+
+\paragraph{Laufzeit}
+
+\paragraph{Beispiel}
+
+\subsubsection{Borouvka}
+\label{subsubsec:Borouvka}
+Der Algorithmus iteriert über die momentan vorhandenen Zusammenhangskomponenten.
+Für jede wählt er diejenige leichteste Kante aus, die aus ihr heraus führt.
+Anschließend werden nun verbundene Zusammenhangskomponenten zusammen gefügt und erneut über diese iteriert,
+solange, bis nur noch eine Zusammenhangskomponente besteht.
+
+\begin{algorithm}{Borouvka}[G]{
+	\qinput{}
+	\qoutput{}
+}
+\end{algorithm}
+
+\paragraph{Laufzeit}
+
+\paragraph{Beispiel}

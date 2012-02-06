@@ -1,0 +1,289 @@
+%1. Datenmodellierung
+%systematischer Entwurf von DB
+%Schwerpunkt: Relationale DB
+%2. Datenbanknutzung
+%Zugriff auf die Daten mit SQL (Structured Query Language), interaktiv oder mit Anwendungsprogrammen.
+%
+%3. Implementierungsaspekte von DBS
+%Transaktionen, Synchronisation, (Indexierung)
+%
+%4. Einführung in neuere Techniken der Datenverwaltung
+%Data Warehouse (OLAP), Information Retrieval, Data Mining
+
+%
+%
+%
+\section{Einführung}
+
+Eine \textbf{Datenbank} ist eine Menge von Datenobjekten,
+die einem bestimmten \textit{Datenschema} genügen.
+
+Ein \textbf{Datenbankschema} ist eine formale Beschreibung eines Teils der Wirklichkeit
+mit den Begrifen eines bestimmten \textit{Datenmodells} (z.B. Tabellen und Klassen).
+
+Ein \textbf{Datenmodell} ist eine Sprache um ein
+\textit{Datenbankschema} (mittels der Data Definition Language) zu beschreiben,
+sowie auf eine \textit{Datenbank} (mittels der Data Manipulation Language) zuzugreifen und sie zu bearbeiten.
+
+%
+%
+%
+\section{Thoretische Grundlagen}
+
+\subsection{Schlüssel}
+
+Ein \textbf{Superschlüssel} ist eine Menge von Attributen einer Relation,
+für die keine zwei Tupel die gleichen Werte haben.
+Jede Relation hat mindestens einen Superschlüssel.
+
+% Was ist das?s
+$t_1$, $t_2$ in the relation instance $r(R)$
+$t_1$ [SK] $\neq$ $t_2$ [SK]
+
+Ein \textbf{Schlüssel} $K$ einer Relation $R$ ist ein Superschlüssel von $R$,
+von dem kein Attribut $\alpha$ entfernt werden kann,
+ohne dass $K \setminus \alpha$ kein Superschlüssel von $R$ mehr ist.
+
+Schlüssel sollen aus der Bedeutung der Attribute hergeleitet und nicht
+aus den vorhandenen Werten der einzelnen Instanzen abgeleitet werden.
+Eine Relation kann auch mehrere Schlüssel haben, die dann \textbf{Schlüsselkandidaten} heißen.
+Von ihnen wird einer zum \textbf{Primärschlüssel} bestimmt, der dann verwendet wird,
+um die Tupel der Relation eindeutig zu identifizieren.
+
+Um in einer Relation Bezug auf einen Datensatz einer anderen Relation zu nehmen,
+wird dessen Primärschlüssel $PK$ als sogenannter \textbf{Fremdschlüssel} $FK$ gespeichert.
+
+Für einen Fremdschlüssel $FK$ in einer Relation $R_1$ muss gelten,
+dass die Attribute in $FK$ die gleiche Bedeutung haben, wie in $PK$.
+
+% Wie übersetzt man das sinnerhellend?
+A value of FK in t1 in R1 :
+either occurs as a value of PK for t2 in R2
+i.e., t1 [FK] = t2 [PK]
+or is null.
+
+
+%
+%
+\subsection{Modellierung}
+
+\subsubsection{Chen-Notation}
+
+\paragraph{Entitäten}
+
+(Rechteck),
+schwache Entität (doppeltes Rechteck)
+
+\paragraph{Relationen}
+
+\paragraph{Attribute}
+
+Attribute beschreiben Eigenschaften von Entitäten und Relationen.
+Mn unterscheidet \textbf{einfache Attribute} (Oval, verbunden mit Entität),
+\textbf{mehrwertige Attribute} (doppeltes Oval, verbunden mit Entität) und
+\textbf{zusammengesetzte Attribute} (Oval, verbunden mit Attribut).
+\textbf{Abgeleitete Attribute} (gestricheltes Oval).
+
+\paragraph{}
+
+\subsubsection{(min, max)-Notation}
+
+%
+%
+\subsection{Funktionale Abhängigkeiten}
+
+Funktionale Abhängigkeiten drücken Beziehungen zwischen Attributen einer Relation aus.
+Eine Funktionale Abhängigkeit $F$ der Form $A \rightarrow B$ drückt dabei aus, dass das Attribut $A$ als Determinante von $F$ das Attribut $B$ eindeutig bestimmt.
+
+\subsubsection{Armstrong-Axiome}
+
+\begin{enumerate}
+\item Reflexivität:\\ $X \subseteq Y \Rightarrow Y \rightarrow X$
+\item Erweiterung / Verstärkung:\\ $X \rightarrow Y \Rightarrow XZ \rightarrow YZ$
+\item Transitivität:\\ $X \rightarrow Y \land Y \rightarrow Z \Rightarrow X \rightarrow Z$
+\item Vereinigung:\\ $X \rightarrow Y \land X \rightarrow Z \Rightarrow X \rightarrow YZ$
+\item Dekomposition:\\ $X \rightarrow YZ \Rightarrow X \rightarrow Y \land X \rightarrow Z$
+\item Pseudo-Transitivität:\\ $X \rightarrow Y \land YZ \rightarrow W \Rightarrow XZ \rightarrow W$
+\end{enumerate}
+
+\subsubsection{?}
+
+Minimal cover of a set of FDs, Closure of attribute set
+
+\subsubsection{kanonische Überdeckung}
+
+Aus Wikipedia\footnote{\url{http://de.wikipedia.org/wiki/Kanonische_\%C3\%9Cberdeckung}}
+
+Zu einer gegebenen Menge $F$ von funktionalen Abhängigkeiten nennt man $F_*$ eine kanonische Überdeckung, wenn folgende drei Eigenschaften erfüllt sind:
+\begin{enumerate}
+\item $F_* \equiv F$, das heißt $F_*^+ = F^+$
+\item In $F_*$ existieren keine funktionalen Abhängigkeiten $\alpha \rightarrow \beta$, wobei $\alpha$ und $\beta$ Mengen überflüssiger Attribute enthalten; das heißt, es muss gelten:
+\begin{enumerate}
+\item $\forall A \in \mathbf \alpha: (F_* - (\alpha \rightarrow \beta) \cup ((\alpha - A) \rightarrow \beta)) \not\equiv F_*$
+\item $\forall B \in \mathbf \beta: (F_*- (\alpha \rightarrow \beta) \cup (\alpha \rightarrow (\beta-B))) \not\equiv F_*$
+\end{enumerate}
+\item Jede linke Seite einer funktionalen Abhängigkeit in $F_*$ ist einzigartig. Dies kann durch fortgesetzte Anwendung der Vereinigungsregel auf funktionale Abhängigkeiten der Art $\alpha \rightarrow \beta$ und $\alpha \rightarrow \gamma$ erreicht werden, so dass die beiden funktionalen Abhängigkeiten durch $\alpha \rightarrow \beta\gamma$ ersetzt werden.
+\end{enumerate}
+
+\begin{enumerate}
+\item Linksreduktion
+\item Rechtsreduktion
+\item Alle funktionalen Abhängigkeiten der Form $\alpha \rightarrow \{\}$ entfernen
+\item Alle funktionalen Abhängigkeiten $\alpha \rightarrow \beta$ aus $F$ mit gleichem $\alpha$ zusammenfassen: Wenn $\alpha \rightarrow \beta \in F$, $\alpha \rightarrow \gamma \in F$, dann entferne diese beiden funktionalen Abhängigkeiten aus $F$ und füge $\alpha \rightarrow \beta\gamma$ zu $F$ hinzu.
+\end{enumerate}
+
+\subsubsection{Attributhülle}
+Die Attributhülle $A^+$ eines Attributes $A$ bezeichnet die Menge all derjenigen Attribute, die von $A$ funktional abhängig sind.
+
+\subsubsection{abgeschlossene Hülle}
+Die abgeschlossene Hülle $F^+$ einer Menge von funktionalen Abhängigkeiten $F$ bezeichnet die Menge all derjenigen Attribute, die sich von den funktionalen Abhängigkeiten aus $F$ und deren Determinanten bestimmen lassen.
+
+%
+%
+\subsection{Normalisierung}
+
+\subsubsection{Erste Normalform (1. NF)}
+
+Voraussetzung für die erste Normalform ist, dass alle Attribute atomar sind.
+What we called relation so far.
+
+Nicht in erster Normalform (N1NF) sind geschachtelte Relationen, in denen Attribute wiederum Relationen sind.
+
+\subsubsection{Zweite Normalform (2. NF)}
+
+Historical.
+
+\subsubsection{Dritte Normalform (3. NF)}
+
+Ein relationales Schema $R$ ist in 3. NF wenn, immer wenn eine funktionale Abhängigkeit X $\rightarrow$ An holds in R, entweder X ein Superschlüssel von R ist, oder A ein Primattribut von R ist.
+
+Theorem:
+Jede Relation in 1. NF besitzt eine ”well-behaved“ Dekomposition, i.e., in 3. NF, with lossless join that preserves dependencies.
+
+Assume F is a minimal cover.
+Algorithm to achieve a well-behaved 3NF decomposition.
+
+1. For each FD (X $\rightarrow$ A) in F create a relation with schema (XA).
+
+2. If none of the keys appears in one of the schemas of 1 then add a relation with schema Y, with Y a key.
+
+3. If for relations created in 1. there exists a relation R1 whose schema is included in the schema of another relation, then remove R1.
+
+4. Replace relations (X A1), ..., (X Ak) with a single relation (X A1 ... Ak).
+
+\subsubsection{Boyce-Codd-Normalform (BCNF)}
+
+A relation is in BCNF if for each $X \rightarrow A$ in F+, X is a superkey.
+
+Theorem:
+BCNF $\Rightarrow$ 3NF $\Rightarrow$ 2NF.
+
+\subsubsection{Vierte Normalform (4. NF)}
+
+Später, nicht Klausur-relevant.
+
+%
+%
+%
+\section{Sprachen zur Abfrage und Manipulation von Datenbanken}
+
+%
+%
+\subsection{Relationale Algebra}
+
+\subsubsection{Vereinigung $\cup$}
+
+\subsubsection{Schnittmenge $\cap$}
+
+\subsubsection{Differenz $\setminus$}
+
+\subsubsection{Kartesisches Produkt $\times$}
+
+\subsubsection{Projektion $\pi$}
+
+\subsubsection{Selektion $\sigma$}
+
+\subsubsection{Join $\bowtie$}
+
+%
+%
+\subsection{Structured Query Language (SQL)}
+
+Structured Query Language (SQL) ist eine formale Sprache, die Möglichkeiten zur Anfrage und Manipulation von Datenbanken auf verschiedenen Ebenen bietet.
+
+Auf der strukturellen Ebene können innerhalb eines DBMS ganze Datenbanken und innerhalb einer Datenbank Tabellen erstellt, verändert oder gelöscht werden.
+
+Auf der inhaltlichen Ebene ermöglicht SQL Datensätze zu lesen, bearbeiten und zu löschen.
+
+\subsubsection{Strukturelle Operationen}
+
+CREATE / CHANGE / DROP DATABASE
+CREATE / CHANGE / DROP TABLE
+
+\subsubsection{Inhaltliche Operationen}
+
+SELECT
+UPDATE
+DELETE
+
+Aggregatfunktionen
+SUM, AVG, MAX, MIN, COUNT
+DISTINCT
+GROUP BY
+UNION
+
+GROUPING SETS
+CUBE
+ROLLUP
+
+\subsubsection{Datentypen}
+
+DATE, INT, VARCHAR, TEXT
+
+%
+%
+%
+\section{Technische Umsetzung}
+
+%
+%
+\subsection{Verarbeitung und Optimierung von Anfragen}
+
+Schritte der Verarbeitung
+
+\begin{enumerate}
+\item Query in a high-level query language\\
+SCANNING, PARSING, VALIDATING
+\item Intermediate form of a query\\
+QUERY OPTIMIZER
+\item Execution plan\\
+QUERY CODE GENERATOR
+\item Code to execute the query (interpreted or compiled)\\
+RUNTIME DB PROCESSOR
+\item Result of query
+
+\end{enumerate}
+
+\subsubsection{SCANNING, PARSING, VALIDATING}
+
+\subsubsection{QUERY OPTIMIZER}
+
+Query-Trees
+Perform selection operation as early as possible.
+Replace expressions of the form
+$\sigma P1 \land P2 (e)$
+with
+$\sigma P1 (\sigma P2 (e))$
+Perform projections early
+
+\subsubsection{QUERY CODE GENERATOR}
+
+\subsubsection{RUNTIME DB PROCESSOR}
+
+%
+%
+\subsection{Transaktionen}
+
+%
+%
+\subsection{Nebenläufigkeit}

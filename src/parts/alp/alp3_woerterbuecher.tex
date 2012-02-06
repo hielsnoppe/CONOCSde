@@ -1,0 +1,45 @@
+\section{Wörterbücher}
+
+Der abstrakte Datentyp Wörterbuch (engl. \textit{dictionary}) ermöglicht es, Tupel zu speichern,
+die aus Schlüsseln $k$ (engl. \textit{keys}) aus einer Schlüsselmenge $K$ bestehen,
+sowie aus Werten $v$ (engl. \textit{values}) aus einer Wertemenge $V$,
+auf die die Schlüssel abgebildet werden.
+
+Je nachdem, ob die Schlüsselmenge geordnet ist oder nicht,
+spricht man von einem ungeordneten oder einem geordneten Wörterbuch.
+
+%
+%
+\subsection{ungeordnetes Wörterbuch}
+
+\subsubsection{Operationen}
+\paragraph{put $k$ $v$} Fügt einen Wert $v$ mit $k$ als Schlüssel in das Wörterbuch ein.
+\paragraph{get $k$} Gibt den Wert zu einem Schlüssel $k$ aus dem Wörterbuch zurück.
+\paragraph{remove $k$} Entfernt den Schlüssel $k$ und den dazugehörigen Wert aus dem Wörterbuch.
+
+\subsubsection{Implementierung}
+
+Implementierung durch Hashing (\ref{subsec:Hashing}) mittels Arrays...
+
+%
+%
+\subsection{geordnetes Wörterbuch}
+
+Bei einem geordneten Wörterbuch geht man von einer total geordnete Schlüsselmenge $K$ aus.
+Das heißt, für alle $k_1, k_2, k_1 \neq k_2 \in K$ gilt entweder $k_1 < k_2$ oder $k_2 < k_1$.
+
+\subsubsection{Operationen}
+Durch diese Eigenschaft können ergeben sich zusätzlich zu den Operationen eines ungeordneten Wörterbuches folgende Operationen:
+
+\paragraph{min} Gibt den kleinsten Schlüssel des Wörterbuches zurück.
+\paragraph{max} Gibt den größten Schlüssel des Wörterbuches zurück.
+\paragraph{succ $k$} Gibt den nächstgrößeren Schlüssel als $k$ (Nachfolger, engl. \textit{successor}) aus dem Wörterbuch zurück.
+\paragraph{pred $k$} Gibt den nächstkleineren Schlüssel als $k$ (Vorgänger, engl. \textit{predecessor}) aus dem Wörterbuch zurück.
+
+\subsubsection{Implementierung}
+
+Eine einfache Möglichkeit zur Implementierung ist ähnlich wie bei einem ungeordneten Wörterbuch vorzugehen und jeweils Suchoperationen durchzuführen.
+Es ist aber leicht zu erkennen, dass dies bei größeren Datenmengen sehr ineffizient ist.
+
+Viele effizientere Möglichkeiten, geordnete Wörterbücher zu implementieren,
+lernen wir im folgenden Abschnitt über Bäume (\ref{sec:Baeume}) kennen.

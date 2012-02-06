@@ -1,0 +1,193 @@
+%
+%
+%
+\section{Einführung}
+
+Dieser Kurs behandelt den Entwurf, die Analyse und Bewertung von Algorithmen.
+
+Ein \textbf{Algorithmus} ist ein endlich beschriebenes effektives Verfahren,
+das eine Eingabe in eine Ausgabe überführt.
+
+Beispiele für Algorithmen sind etwa
+Sortieralgorithmen (Quicksort, Mergesort, Heapsort, ...),
+Suchalgorithmen (binäre Suche, Suche in speziellen Datenstrukturen) oder
+Graphenalgorithmen (Kruskal, Floyd-Warshall, Bellman-Ford, ...).
+Die meisten dieser genannten Algorithmen würde man jedoch nicht als höhere Algorithmen bezeichnen.
+Ein Beispiel soll verdeutlichen, was einen sogenannten höheren Algorithmus ausmacht.
+
+\subsection{Ein höherer Algorithmus}
+
+Dazu betrachten wir ein Problem aus der Statistik.
+Häufig kommt es vor, dass für eine große Datenmenge ein einzelner repräsentativer Wert gefunden werden soll.
+Eine Möglichkeit dafür ist der Durchschnitt, der jedoch anfällig für Ausreißer ist.
+Eine oftmals bessere Möglichkeit bietet der Median.
+
+Der \textbf{Rang} $rg(s)$ eines Elementes $s \in S$
+in einer total geordneten Menge $S$ ist die Anzahl von Elementen in $S$,
+die kleiner sind, als $s$.
+
+Der \textbf{Median} einer total geordneten Menge $S$ ist dasjenige Element $s \in S$,
+dessen Rang $rg(s) = \ceil{\frac{\abs{S}+1}{2}}$ ist.
+Das heißt, es gibt in $S$ genauso viele Elemente, die kleiner sind als $s$,
+wie Elemente, die größer sind als $s$.
+
+Eine einfache Möglichkeit den Median zu bestimmen ist,
+die Menge zu sortieren und das Element an der Stelle $\ceil{\frac{\abs{S}+1}{2}}$ auszuwählen.
+Dieser Ansatz hat eine Laufzeit von $\Theta(n \log n)$.
+
+Ein weiterer Ansatz geht davon aus, dass es eine weitere Funktion $SPLITTER(S)$ gibt,
+die zwar nicht genau den Median findet, jedoch eine gute Näherung in Form eines Elementes $q$,
+für das gilt $\ceil{\frac{1}{4} n} \leq rg(q) \leq \floor{\frac{3}{4} n}$.
+
+Wenn wir diese Funktion ohne weiteren Aufwand verwenden können, so lässt sich zeigen,
+dass wir den Median in linearer Laufzeit bestimmen können.
+Dazu lösen wir erst das allgemeinere Auswahlproblem.
+
+\subsection{Das Auswahlproblem}
+
+Finde ein Element $s \in S$ mit $rg(s) = k$.
+Idee: Splitter zum Teilen verwenden, rekursiv vorgehen (ähnl. Quicksort)
+
+\begin{algorithm}{SELECT}[S, k]{
+}
+\qif $\abs{S} < c$\\
+	\qthen use brute force\\
+	\qelse
+		$q$ \qlet SPLITTER($S$)\\
+		$S_<$ \qlet $\{s \in S | s < q\}$\\
+		$S_>$ \qlet $\{s \in S | s > q\}$\\
+		\qif $\abs{S_<} \geq k$\\
+			\qthen \qreturn SELECT($S_<$, $k$)\\
+			\qelse
+				\qif $\abs{S_<} = k-1$\\
+					\qthen \qreturn $q$\\
+					\qelse \qreturn SELECT($S_>$, $k-\abs{S_<}-1$)
+				\qfi
+		\qfi
+\qfi
+\end{algorithm}
+
+Laufzeitanalyse
+
+
+
+
+
+\begin{algorithm}{SELECT}[S, k]{
+}
+\qif $\abs{S} < c$\\
+	\qthen use brute force\\
+	\qelse
+		unterteile $S$ in 5er-Gruppen\\
+		$S'$ \qlet Mediane aller 5er-Gruppen\\
+		$q$ \qlet SELECT($S'$, $\ceil{\frac{\abs{S'}+1}{2}}$)\\
+		$S_<$ \qlet $\{s \in S | s < q\}$\\
+		$S_>$ \qlet $\{s \in S | s > q\}$\\
+		\qif $\abs{S_<} > k$\\
+			\qthen \qreturn SELECT($S_<$, $k$)\\
+			\qelse
+				\qif $\abs{S_<} = k$\\
+					\qthen \qreturn $q$\\
+					\qelse \qreturn SELECT($S_>$, $k-\abs{S_<}-1$)
+				\qfi
+		\qfi
+\qfi
+\end{algorithm}
+
+\subsection{Church-Turing-These}
+
+intuitiv berechenbar = RAM-berechenbar
+
+\subsection{Laufzeit und Speicherplatz}
+
+Gegeben ein RAM-Programm, das eine Funktion $f$ berechnet.
+Sei $x \in \mathbb{Z}*$ eine Eingabe. Dann ist
+die Laufzeit T(x) die Gesamtkosten der Arbeitsschritte bis das Programm bei Eingabe $x$ hält.
+der Speicherplatz S(x) der gesamte Speicherbedarf
+
+\subsubsection{Einheitskostenmaß}
+\subsubsection{Logarithmisches Kostenmaß}
+
+Pragmatische Entscheidung: EKM findet Anwendung bei kombinatorischen Algorithmen wie z.B. Sortieren, Suchen, Zeichenketten und Graphen.
+LKM bei zahlentheoretischen Algorithmen wie z.B. Primzahltest.
+
+Um allgemeine Aussagen über einen Algorithmus zu erhalten, fassen wir Eingaben $x$ nach ihrer Größe $n = \abs{x}$ zusammen.
+Was genau dabei die Größe einer Eingabe darstellt, ist problemspezifisch festzulegen.
+Für Zeichenketten bietet sich oft ihre Länge an, für Graphen etwa die Anzahl Knoten oder Kanten.
+Um nicht alle verschiedenen Eingaben einer bestimmten Länge testen zu müssen, wird jeweils der worst-case angenommen,
+also Laufzeit und Speicherbedarf im jeweils komplexesten Fall berechnet.
+Dabei gilt für alle $x$ mit $\abs{x} = n$:
+$$T_{worst-case}(n) = \max T(x) \qquad S_{worst-case}(n) = \max S(x)$$
+
+\section{Grundlegende Techniken}
+
+\subsection{Divide et impera}
+
+\subsubsection{Lösen von Rekursionsgleichungen}
+
+Es gibt verschiedene Ansätze um Rekursionsgleichungen zu lösen und in eine geschlossene Form zu bringen.
+
+\paragraph{Intuition}
+Mit viel Erfahrung oder Glück kann man das Ergebnis erraten und dessen
+Richtigkeit anschließend z.B. mittels vollständiger Induktion beweisen.
+
+\paragraph{Einsetzen} Wiederholt einsetzen und Muster erkennen
+
+\paragraph{Rekursionsbaummethode} Ein Bild malen und Muster erkennen
+
+\paragraph{Master-Theorem}
+Dies ist ein allgemeines Rezept, das eine große Anzahl von Rekursionsgleichungen
+abdeckt, jedoch nicht alle.
+
+Sei $a \geq 1$, $b > 1$ und $f: \mathbb{N} \rightarrow \mathbb{N}$.\\
+Sei $T(n) = a \cdot T(\frac{n}{b}) + f(n)$.
+
+\subsubsection{Problem des engsten Punktpaares}
+
+Gegeben sind $n$ Punkte in der Ebene $P \subseteq \mathbb{R}^2$, $\abs{P} = n$.
+Gesucht sind diejenigen Punkte $p, q \in P, p \neq q$ für die $d(p, q)$ minimal ist.
+
+\subsection{Dynamisches Programmieren}
+
+
+
+\section{Datenstrukuren}
+
+das Problem der Vereinigung disjunkter Mengen (DSU)
+
+Gegeben ist eine endliche Menge $S = \{1, 2, \ldots, n\}$, sowie eine Partition
+von $S$ in nichtleere disjunkte Teilmengen
+$S = S_1 \cup S_2 \cup \ldots \cup S_k$
+
+Gesucht ist eine Möglichkeit $S$ und die Partitionierung so zu speichern, dass
+die Funktionen $UNION(S_i, S_j)$ und $FIND(s)$ effizient unterstützt werden:
+
+$UNION(S_i, S_j)$: Ändere die Partitionierung, sodass $S_i$ und $S_j$ durch
+$S_i \cup S_j$ ersetzt werden
+
+$FIND(s)$: Finde die Menge aller Teilmengen von $S$, die $s \in S$ enthalten.
+
+Anwendungen:
+\begin{itemize}
+\item Finden von Zusammenhangskomponenten in Graphen
+\item Algorithmus von Kruskal
+\item Segmentierung eines Bildes
+\item Perkolation (?)
+\item Äquivalenz in FORTRAN
+\end{itemize}
+
+Realisierung als Datenstruktur
+
+Jedes Element entspricht einem Knoten/Record/Object
+Jede Menge $S_i$ wird durch einen Repräsentanten $s \in S_i$ dargestellt.
+Jedes Element $s$ hat einen Verweis auf einen nachfolger $s'$, der in der selben
+Menge liegt, wie $s'$. Die Verweise führen zum Repräsentanten der jeweiligen
+Menge, dessen Nachfolger $\perp$ ist.
+Diese Darstellung heißt disjunkter Mengen-Wald. Jeder Baum entspricht einer
+Menge der Partition. Jede Wurzel entspricht dem Repräsentanten der Menge.
+
+Implementierung von UNION und FIND
+
+FIND(s): Eingabe: Das Objekt, das das Element im Waöd darstellt
+Ausgabe: Wurzel des Baumes
+Algorithmus: 

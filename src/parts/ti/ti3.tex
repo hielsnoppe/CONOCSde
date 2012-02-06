@@ -1,0 +1,110 @@
+\section{Notizen aus dem letzten Tutorium}
+\begin{verbatim}
+Kernel, monolithisch vs. micro, Linux ansehen
+Interrupts, Systemaufrufe, Kontextwechsel
+Prozess vs. Thread
+PCB, Organisation von Prozessen durch das OS, Verwaltung durch Queues
+Memory Management, Freispeicherverwaltung
+drei verschiedene Adressierungen: absolute, relative, virtuelle Adressen
+Fragmentierung
+Caching
+Scheduling (preemptive, non-preemptive)
+Netzwerke Layer 1 3 4 7
+\end{verbatim}
+%
+%
+%
+\section{Betriebssysteme}
+
+\subsection{Schichtenmodell}
+
+In welche sieben Ebenen kann man ein Rechnersystem einteilen?
+\cite{kreissl}
+\begin{enumerate}
+\item Anwendungsebene (Anwendersoftware)
+\item Assemblerebene (Beschreibung von Algorithmen, Link \& Bind)
+\item Betriebssystem (Speichermanagment, Prozesskommunikation)
+\item Instruction Set Architecture (ISA, Adressierungsarten)
+\item Microarchitektur (Risc, Cisc, Branch Prediction..)
+\item Logische Ebene (Register, Schieber, Latches..)
+\item Transistorebene (Transistoren, MOS)
+\end{enumerate}
+
+Aufgabe eines Betriebssystems ist die Verwaltung von
+Speicher,
+Prozessen (Scheduling, Sicherheit) und
+Hardwareressourcen (I/O).
+
+\subsection{Speicherverwaltung}
+
+\subsubsection{Aufteilung (Paging)}
+Verschiedene Verfahren, den verfügbaren Speicher aufzuteilen:
+Feste Speicherblöcke (Fixed Partitions), Problem: Interne Fragmentierung
+Speicherblöcke variabler Größe (Dynamic Partitions), Problem: Externe Fragmentierung
+Dynamische Algorithmen (First-Fit, Next-Fit)
+Buddy System (?)
+Paging
+
+\subsubsection{Verwaltung (Swapping, Replacement-Policies)}
+LRU, FIFO, Clock, (Optimal)
+
+\subsection{Dateisystem}
+
+\subsection{Prozessverwaltung}
+
+\subsubsection{Scheduling}
+
+\subsection{I/O-Verwaltung}
+
+Programmed I/O, busy waiting\\
+Interrupt-driven I/O\\
+Direct Memory Access (DMA)
+
+%
+%
+%
+\section{Kommunikationssysteme}
+
+\subsection{Schichtenmodelle (OSI und TP/IP)}
+
+Der Aufbau von Computernetzwerken wird durch verschiedene Modelle beschrieben.
+Eines davon ist das OSI-Modell (Open Systems Interconnection Reference Model),
+welches eine sehr feine Unterschiedung verschiedener Aufgaben bei der Netzwerkkommunikation macht.
+Ein anderes ist das TCP/IP-Referenzmodell,
+welches im heutigen Aufbau des Internets umgesetzt ist und einige Schichten des OSI-Modells zusammenfasst:
+
+\paragraph{Anwendungsschicht}
+OSI: Anwendung (Application), Darstellung (Presentation), Sitzung (Session)
+\paragraph{Transportschicht}
+OSI: Transport
+\paragraph{Internetschicht}
+OSI: Vermittlung (Network)
+\paragraph{Netzzugangsschicht}
+OSI: Bitübertragung (Physical), Sicherungsschicht (Data Link)
+Mit dieser Schicht beschäftigt sich das TCP/IP-Modell nicht näher.
+Behandelt werden sollen Ethernet, WLAN und Bluetooth.
+
+\subsection{Netzzugangsschicht}
+Aufgabe dieser Schicht ist es, die Übertragung von Signalen zu ermöglichen.
+Signale sind die Veränderung einer physikalischen Größe über einer bestimmten Zeit.
+Sie stellen die Abstraktion von Daten dar.
+Zu dieser Übertragung wird ein Medium benötigt, über das die Signale übertragen werden.
+Dieses können zum Beispiel verschiedene Arten von Kabeln sein,
+oder auch weniger anschauliche Medien wie der leere Raum bei drahtloser Übertragung.
+
+
+\subsection{Internetschicht}
+
+\subsubsection{IP-Header}
+
+
+\subsection{Transportschicht}
+
+\subsubsection{TCP- und UDP-Header}
+
+
+\subsection{Anwendungsschicht}
+
+\subsection{Eine Reise durch das Internet}
+
+Was passiert, wenn ich eine Seite im Browser öffne, bzw. eine E-Mail versende?

@@ -1,0 +1,33 @@
+# ignore temporary or lock files
+*~
+
+# ignore remainders of build processes
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+
+# but consider published builds?
+#!/bin/*.pdf
+
+# ignore ressources (as they are likely to be large binaries)
+/res/*
