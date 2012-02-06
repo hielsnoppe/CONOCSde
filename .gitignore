@@ -25,6 +25,7 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.pdf
 
 # but consider published builds?
 #!/bin/*.pdf
