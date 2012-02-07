@@ -18,12 +18,23 @@ ich und andere davon profitieren können. Jede Unterstützung ist willkommen.
 Creative Commons 3.0, attribution, non-commercial, share-alike
 
 
-~ How to build ~
+~ Project structure and building ~
 
-Run the following command in your shell at project root.
+README
+bin/			yields binary output (pdf|ps|dvi)
+				(and sometimes auxiliary files which should go into tmp/)
+src/
+	build/		yields source code for full and partial builds
+	parts/		yields actual contents source code
+tmp/			yields auxiliary files from building
+
+In order to build run the following command in your shell at project root.
 Optionally use -aux-directory=tmp if supported by your version of pdflatex.
 
-```$ pdflatex -output-directory=bin src/build/[book|part|chapter|...].tex```
+$ pdflatex -output-directory=bin src/build/main.tex
+$ pdflatex -output-directory=bin src/build/main.tex
+$ makeindex bin/main.idx
+$ pdflatex -output-directory=bin src/build/main.tex
 
 
 ~ Annotations ~

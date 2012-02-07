@@ -6,7 +6,10 @@
 \usepackage{amsmath}
 \usepackage{marvosym}
 %\usepackage[T1]{fontenc}
+\usepackage{makeidx}
 \usepackage[pdftex, bookmarks=true, bookmarksnumbered=true]{hyperref}
+
+\makeindex
 
 % convenience
 \newcommand{\Nat}{\mathbb{N}}
@@ -21,21 +24,3 @@
 \newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
 \newcommand{\abs}[1]{\left|#1\right|}
-
-\title{Studium der Informatik}
-\subtitle{Individuelle Zusammenstellung}
-\author{Niels Hoppe}
-
-\begin{document}
-
-\maketitle
-\tableofcontents
-
-%\part{Individuelle Zusammenstellung}
-\chapter{Höhere Algorithmik}
-\input{src/parts/inf/ha.tex}
-
-\bibliography{src/parts/references.bib}{}
-\bibliographystyle{plain}
-
-\end{document}
