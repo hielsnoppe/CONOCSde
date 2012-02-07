@@ -6,16 +6,20 @@ Implementierung als Adjazenzliste oder Adjazenzmatrix oder verlinkt.
 \hline
 Algorithmus		& Laufzeit	\\\hline\hline
 \paragraph{Breitensuche}
+\index{Algorithmen!Graphen!Breitensuche}
 &
 \\\hline
 \paragraph{Tiefensuche}
+\index{Algorithmen!Graphen!Tiefensuche}
 &
 \\\hline
 \paragraph{Topologische Sortierung}
-&
+\index{Algorithmen!Graphen!Topologische
+Sortierung} &
 $$\mathcal{O}(n) \mbox{\quad average, \quad} \mathcal{O}(n^2) \mbox{\quad worst}$$
 \\\hline\hline
 \paragraph{Dijkstra}
+\index{Algorithmen!Graphen!Dijkstra}
 Knoten mit Entfernung zum Startknoten in Prioritätswarteschlange
 &
 $$\mathcal{O}(|V| \cdot (T_{enqueue} + T_{dequeue})$$
@@ -23,6 +27,7 @@ $$ + |E| \cdot T_{decreaseKey})$$
 $$\mathcal{O}(|V| \cdot \log |V| + |E| \cdot \log |V|)$$
 \\\hline
 \paragraph{A*}
+\index{Algorithmen!Graphen!A*}
 Dijkstra mit Heuristik $h$ (zulässig, monoton/konsistent):
 \begin{itemize}
 \item $\forall v \in V: h(v) \leq d(v)$
@@ -31,25 +36,30 @@ Dijkstra mit Heuristik $h$ (zulässig, monoton/konsistent):
 &
 \\\hline
 \paragraph{Bellman-Ford}
+\index{Algorithmen!Graphen!Bellman-Ford}
 iteriert $|V|-1$ mal über alle Kanten
 &
 $$\mathcal{O}(|V| \cdot |E|)$$
 $$\mathcal{O}(|V|^2 \cdot |E|)$$
 \\\hline
 \paragraph{Floyd-Warshal}
+\index{Algorithmen!Graphen!Floyd-Warshall}
 iteriert $|V|$ mal über Adjazenzmatrix
 &
 $$\mathcal{O}(|V|^3)$$
 \\\hline\hline
 \paragraph{Prim-Jarnik-Dijkstra}
+\index{Algorithmen!Graphen!Prim-Jarnik-Dijkstra}
 ZSHK wächst von einem Startknoten aus
 &
 \\\hline
 \paragraph{Kruskal}
+\index{Algorithmen!Graphen!Kruskal}
 Wählt aus den leichtesten Kanten, die ZSHKs verbinden
 &
 \\\hline
 \paragraph{Borouvka}
+\index{Algorithmen!Graphen!Borouvka}
 Iteriert über ZSHKs
 &
 \\\hline
@@ -58,6 +68,7 @@ Iteriert über ZSHKs
 
 \subsection{Breitensuche}
 \label{subsec:Breitensuche}
+\index{Algorithmen!Graphen!Breitensuche}
 
 Rekursiver Algorithmus zur Breitensuche
 
@@ -87,6 +98,7 @@ Q.enqueue(s)\\
 
 \subsection{Tiefensuche}
 \label{subsec:Tiefensuche}
+\index{Algorithmen!Graphen!Tiefensuche}
 
 Rekursiver Algorithmus zur Tiefensuche
 
@@ -129,6 +141,7 @@ s.push((s,s.incidentEdges()))\\
 
 \subsection{Topologische Sortierung}
 \label{subsec:TopologischeSortierung}
+\index{Algorithmen!Graphen!Topologische Sortierung}
 
 Eine topoligische Sortierung ist eine Anordnung von Knoten eines Graphen,
 bei der keine Kanten von Knoten zu anderen Knoten verlaufen, die vor ihnen angeordnet sind.
@@ -158,6 +171,7 @@ TODO: Teilpfadoptimalität
 
 \subsubsection{Dijkstra}
 \label{subsubsec:Dijkstra}
+\index{Algorithmen!Graphen!Dijkstra}
 
 Der Algorithmus von Dijkstra bietet eine Lösung für das \textit{single-pair shortest path}- und das \textit{SSSP}-Problem.
 Er ist ein gieriger Algorithmus (s. \ref{subsec:GierigeAlgorithmen} Gierige Algorithmen) und funktioniert nur korrekt, wenn alle Kantengewichte positiv sind.
@@ -200,6 +214,7 @@ TODO: beispielhafte Ausführung wie in der Klausur anzuwenden
 
 \subsubsection{A*}
 \label{subsubsec:AStern}
+\index{Algorithmen!Graphen!A*}
 
 Der A*-Algorithmus ist dem Algorithmus von Dijkstra sehr ähnlich.
 Um die Laufzeit zu verbessern nutzt er jedoch zusätzlich eine Heuristik $h: V \mapsto \mathbb{R}_0^+$,
@@ -223,6 +238,7 @@ TODO: beispielhafte Ausführung wie in der Klausur anzuwenden
 
 \subsubsection{Bellman-Ford}
 \label{subsubsec:BellmanFord}
+\index{Algorithmen!Graphen!Bellman-Ford}
 
 Anders als der Algorithmus von Dijkstra funktioniert dieser Algorithmus auch mit negativen Kantengewichten,
 jedoch dürfen keine negativen Kreise vorhanden sein.
@@ -252,6 +268,7 @@ Wenn die Summe aus dem Wert des Startknotens der Kante und dem Kantengewicht kle
 
 \subsubsection{Floyd-Warshall}
 \label{subsubsec:FloydWarshall}
+\index{Algorithmen!Graphen!Floyd-Warshall}
 
 Der Algorithmus von Floyd und Warshall ist der erste,
 der das \textit{APSP}-Problem und damit alle Teilprobleme kürzester Wege löst.
@@ -296,6 +313,8 @@ dann gibt es in $E'$ eine Kante $e' \in E_{S}$, so dass $|e'| \leq |e|$.
 
 \subsubsection{Prim-Jarnik-Dijkstra}
 \label{subsubsec:PrimJarnikDijkstra}
+\index{Algorithmen!Graphen!Prim-Jarnik-Dijkstra}
+
 Der Algorithmus geht von einem Startknoten $v$ aus,
 der anfangs alleine eine Zusammenhangskomponente $C$ bildet.
 Diese wird nun schrittweise um diejenigen Knoten erweitert,
@@ -313,6 +332,8 @@ zu denen diejenige leichteste Kante führt, die aus $C$ heraus führt.
 
 \subsubsection{Kruskal}
 \label{subsubsec:Kruskal}
+\index{Algorithmen!Graphen!Kruskal}
+
 Der Algorithmus betrachtet anfangs jeden Knoten als eine eigene Zusammenhangskomponente.
 Er fügt dann solange jeweils diejenigen leichtesten Kanten ein,
 die zwei unterschiedliche Zusammenhangskomponenten verbinden,
@@ -330,6 +351,8 @@ bis es nur noch eine Zusammenhangskomponente gibt.
 
 \subsubsection{Borouvka}
 \label{subsubsec:Borouvka}
+\index{Algorithmen!Graphen!Borouvka}
+
 Der Algorithmus iteriert über die momentan vorhandenen Zusammenhangskomponenten.
 Für jede wählt er diejenige leichteste Kante aus, die aus ihr heraus führt.
 Anschließend werden nun verbundene Zusammenhangskomponenten zusammen gefügt und erneut über diese iteriert,
