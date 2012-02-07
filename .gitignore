@@ -1,6 +1,9 @@
 # ignore temporary or lock files
 *~
 
+# ignore eclipse project files
+.project
+
 # ignore remainders of build processes
 *.aux
 *.glo
@@ -30,5 +33,9 @@
 # but consider published builds?
 #!/bin/*.pdf
 
-# ignore ressources (as they are likely to be large binaries)
+# ignore ressources (as they are likely to be large binaries),
 /res/*
+# binary output
+/bin/*
+# and temporary files
+/tmp/*
