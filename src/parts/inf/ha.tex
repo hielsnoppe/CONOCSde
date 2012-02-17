@@ -132,32 +132,43 @@ $$T_{worst-case}(n) = \max T(x) \qquad S_{worst-case}(n) = \max S(x)$$
 
 \subsection{Divide et impera}
 
-\subsubsection{Lösen von Rekursionsgleichungen}
-
-Es gibt verschiedene Ansätze um Rekursionsgleichungen zu lösen und in eine geschlossene Form zu bringen.
-
-\paragraph{Intuition}
-Mit viel Erfahrung oder Glück kann man das Ergebnis erraten und dessen
-Richtigkeit anschließend z.B. mittels vollständiger Induktion beweisen.
-
-\paragraph{Einsetzen} Wiederholt einsetzen und Muster erkennen
-
-\paragraph{Rekursionsbaummethode} Ein Bild malen und Muster erkennen
-
-\paragraph{Master-Theorem}
-Dies ist ein allgemeines Rezept, das eine große Anzahl von Rekursionsgleichungen
-abdeckt, jedoch nicht alle.
-
-Sei $a \geq 1$, $b > 1$ und $f: \mathbb{N} \rightarrow \mathbb{N}$.\\
-Sei $T(n) = a \cdot T(\frac{n}{b}) + f(n)$.
-
 \subsubsection{Problem des engsten Punktpaares}
 
 Gegeben sind $n$ Punkte in der Ebene $P \subseteq \mathbb{R}^2$, $\abs{P} = n$.
 Gesucht sind diejenigen Punkte $p, q \in P, p \neq q$ für die $d(p, q)$ minimal ist.
 
+\subsection{Lösen von Rekursionsgleichungen}
+
+Es gibt verschiedene Ansätze um Rekursionsgleichungen zu lösen und in eine geschlossene Form zu bringen.
+
+\subsubsection{Intuition}
+Mit viel Erfahrung oder Glück kann man das Ergebnis erraten und dessen
+Richtigkeit anschließend z.B. mittels vollständiger Induktion beweisen.
+
+\subsubsection{Einsetzen} Wiederholt einsetzen und Muster erkennen
+
+\subsubsection{Rekursionsbaummethode} Ein Bild malen und Muster erkennen
+
+\subsubsection{Master-Theorem}
+Dies ist ein allgemeines Rezept, das eine große Anzahl von Rekursionsgleichungen
+abdeckt, jedoch nicht alle.
+
+Sei $a \geq 1$, $b > 1$ und $f: \mathbb{N} \rightarrow \mathbb{N}$. Sei
+$$T(n) = a \cdot T(\frac{n}{b}) + f(n)$$.
+
+
 \subsection{Dynamisches Programmieren}
 
+\subsubsection{Einkaufsproblem}
+
+\subsubsection{Traveling-Salesman-Problem}
+
+
+\subsection{Greedy-Algorithmen}
+
+\subsubsection{Münzwechsel}
+\subsubsection{Tankstellen-Problem}
+\subsubsection{Vorlesungsplanung}
 
 
 \section{Datenstrukuren}
@@ -217,8 +228,37 @@ Algorithmus:
 
 \section{Graphen}
 
-\subsection{Page-Rank}
+\subsection{PageRank}
+
+Der PageRank-Algorithmus\index{Algorithmen!Graphen!PageRank} ist ein
+Algorithmus, der das Problem von Suchmaschinen lösen soll, aus einer großen Menge von Seiten, die einen bestimmten Suchbegriff
+enthalten, die besten auszuwählen. Dazu gab es bereits verschiedene Ansätze,
+bevor 1997 Lawrence (Larry) Page\index{Personen!Page, Lawrence} diesen
+Algorithmus zum Patent anmeldete.
+
+Er verwendet eine Idee von Jon Kleinberg\index{Personen!Kleinberg, Jon} und
+Larry Page und stützt sich auf die Verweisstruktur des WWW.
+Er simuliert zufällige Surfer und ermittelt die Wahrscheinlichkeit dafür, dass ein solcher eine bestimmte Seite erreicht. Seiten
+mit hoher Wahrscheinlichkeit werden dann besser bewertet als solche, mit einer
+geringen Wahrscheinlichkeit.
+
+\subsubsection{Formalisierung}
+
+Das WWW wird dargestellt als ein gerichteter Graph G = (V, E).
+Dieser ist nicht zwangsläufig zusammenhängend und veränderlich. Er kann Kreise
+enthalten, sowie fehlerhafte Kanten ohne Endknoten.
+
 \subsection{Max-Fluss-Min-Schnitt}
+
+\subsubsection{Ford-Fulkerson}
+\index{Algorithmen!Graphen!Ford-Fulkerson}
+Der Algorithmus von Lewster Randolph Ford jr.\index{Personen!Ford, Lewster
+Randolph} und Delbert Ray Fulkerson\index{Personen!Fulkerson, Delbert Ray}
+
+\subsubsection{Edmonds-Karp}
+\index{Algorithmen!Graphen!Edmons-Karp}
+Der Algorithmus von Jack Edmonds\index{Personen!Edmonds, Jack} und Richard
+M. Karp\index{Personen!Karp, Richard Manning}
 
 
 \section{Lineares Programmieren}
@@ -226,4 +266,27 @@ Algorithmus:
 \subsection{Simplex}
 \subsection{Dualität von Linearen Programmen}
 
+
 \section{Komplexitätstheorie}
+
+Das Ziel der Komplexitätstheorie ist es, Probleme nach den Ressourcen zu
+klassifizieren, die für ihre Lösung notwendig sind.
+Zu diesen Ressourcen zählt man insbesondere die Zeit und den Speicherplatz, aber
+auch die Anzahl benötigter Zufallsbits bei randomisierten Algorithmen oder den
+Kommunikationsaufwand bei verteilten Algorithmen.
+
+Im Laufe der Zeit wurden viele verschiedene und teilweise auch äquivalente
+Komplexitätsklassen definiert. Die Sammlung dieser Klassen wird manchmal auch
+als Klassenzoo bezeichnet. Einige der wichtigsten Komplexitätsklassen werden
+später im gleichnamigen Abschnitt vorgestellt. Genauer ansehen wollen wir uns
+nun zuerst die Klassen P und NP.
+
+\subsection{(Polynomialzeit-)Reduktion}
+\subsection{verschiedene Polynomialzeitreduktionen}
+\subsubsection{CLIQUE $\leq_p$ SUBSET-SUM}
+
+\subsection{Der Klassenzoo}
+
+\subsubsection{LOGSPACE bzw. L}
+\subsubsection{PSPACE}
+\subsubsection{CONP}
